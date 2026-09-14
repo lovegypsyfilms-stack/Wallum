@@ -20,20 +20,20 @@ P = json.loads((root / "clai.json").read_text(encoding="utf-8"))
 ECO = "ecology-cultural-heritage"
 
 # Grouped so the index reads as an argument rather than a list of links.
-# (group title, group blurb, [(id, label, image class, [(page, lo, hi), ...]), ...])
+# (group title, [(id, label, image class, [(page, lo, hi), ...]), ...])
 GROUPS = [
-    ("Why we are here", "The organisation, the ground it is trying to buy, and whose country it is.", [
+    ("Why we are here", [
         ("vision",   "Vision and mission",     "img-girl",     [("about-us", 1, 14)]),
         ("land",     "The land",               "img-land",     [("wallum", 0, None)]),
         ("culture",  "Cultural significance",  "img-canopy",   [(ECO, 1, 4)]),
     ]),
-    ("The living world", "What is actually on the site, species by species.", [
+    ("The living world", [
         ("biodiv",   "Biodiversity",           "img-hero",      [(ECO, 5, 44)]),
         ("koala",    "Koala",                  "img-trees",    [(ECO, 45, 52)]),
         ("cockatoo", "Glossy black-cockatoo",  "img-cockatoo", [(ECO, 53, 56)]),
         ("water",    "Water and the froglet",  "img-frog",     [(ECO, 57, None)]),
     ]),
-    ("Taking part", "How the purchase is funded, who stands behind it, and how to join.", [
+    ("Taking part", [
         ("donate",   "Donate",                 "img-flower",   [("pledge", 0, 8)]),
         ("pledge",   "Pledge and endorsements","img-dusk",     [("pledge", 9, None)]),
         ("member",   "Membership and contact", "img-gather",   [("membership", 0, None),
@@ -41,7 +41,7 @@ GROUPS = [
         ("team",     "Team and advisors",      "img-heath",     [("about-us", 15, None)]),
     ]),
 ]
-SECTIONS = [sec for _t, _b, secs in GROUPS for sec in secs]
+SECTIONS = [sec for _t, secs in GROUPS for sec in secs]
 
 # Facts worth catching the eye on a page this long. Bolded on first appearance
 # within a section only — these are CLAI's own words, not added emphasis.
@@ -120,7 +120,7 @@ def words(page, lo, hi):
 
 n = 0
 index_groups, secs = [], []
-for gi, (gtitle, gblurb, gsecs) in enumerate(GROUPS, 1):
+for gi, (gtitle, gsecs) in enumerate(GROUPS, 1):
     row = []
     for sid, label, img, parts in gsecs:
         n += 1
@@ -130,7 +130,6 @@ for gi, (gtitle, gblurb, gsecs) in enumerate(GROUPS, 1):
         <div class="group-head">
           <span class="group-num">{gi:02d}</span>
           <h3>{html.escape(gtitle)}</h3>
-          <p>{html.escape(gblurb)}</p>
         </div>
         <div class="tiles tiles--{len(gsecs)}">
 {chr(10).join(row)}
@@ -141,7 +140,6 @@ for gi, (gtitle, gblurb, gsecs) in enumerate(GROUPS, 1):
     <div class="inner">
       <span class="group-num">{gi:02d}</span>
       <h2>{html.escape(gtitle)}</h2>
-      <p>{html.escape(gblurb)}</p>
     </div>
   </section>""")
 
@@ -149,7 +147,7 @@ for gi, (gtitle, gblurb, gsecs) in enumerate(GROUPS, 1):
         body = "\n".join(render(pg, lo, hi) for pg, lo, hi in parts)
         wc = sum(words(pg, lo, hi) for pg, lo, hi in parts)
         srcs = " &middot; ".join(f"clai.au/{pg}" for pg, _l, _h in parts)
-        idx = sum(len(g[2]) for g in GROUPS[:gi-1]) + k
+        idx = sum(len(g[1]) for g in GROUPS[:gi-1]) + k
         secs.append(f"""  <section class="sechead {img}" id="{sid}">
     <div class="sechead-in">
       <span class="num">{idx:02d} &middot; {html.escape(gtitle)}</span>
