@@ -1,7 +1,13 @@
 # Photography
 
-Nothing in this folder yet. **The site works without it** — every image slot
-falls back to a painted gradient — but the photographs are what will carry it.
+**Everything in this folder is a placeholder.** Each file is a crop taken from
+the original AI-generated design mockup, upscaled. They are low resolution,
+they are not photographs of Wallum, and they are not licensed for publication.
+
+They are here so the site can be shown and judged as a whole. Replace each one
+with the real shot and keep the filename — nothing in the CSS needs editing.
+
+**Do not launch with these files.**
 
 ## How to add one
 
