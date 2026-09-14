@@ -17,24 +17,47 @@ import html, json, pathlib, re
 root = pathlib.Path(__file__).parent
 P = json.loads((root / "clai.json").read_text(encoding="utf-8"))
 
-# (id, label, image class, [(source page, first block, last block), ...])
-# Twelve sections, which tiles evenly at six, four, three or two across.
 ECO = "ecology-cultural-heritage"
-SECTIONS = [
-    ("land",     "The land",               "img-land",     [("wallum", 0, None)]),
-    ("culture",  "Cultural significance",  "img-canopy",   [(ECO, 1, 4)]),
-    ("biodiv",   "Biodiversity",           "img-heath",    [(ECO, 5, 44)]),
-    ("koala",    "Koala",                  "img-trees",    [(ECO, 45, 52)]),
-    ("cockatoo", "Glossy black-cockatoo",  "img-cockatoo", [(ECO, 53, 56)]),
-    ("water",    "Aquatic biodiversity",   "img-hero",     [(ECO, 57, 60)]),
-    ("froglet",  "Wallum froglet",         "img-frog",     [(ECO, 61, None)]),
-    ("vision",   "Vision and mission",     "img-girl",     [("about-us", 1, 14)]),
-    ("team",     "Team and advisors",      "img-bark",     [("about-us", 15, None)]),
-    ("donate",   "Donate",                 "img-flower",   [("pledge", 0, 8)]),
-    ("pledge",   "Pledge and endorsements","img-dusk",     [("pledge", 9, None)]),
-    ("member",   "Membership and contact", "img-gather",   [("membership", 0, None),
-                                                            ("contact-us", 0, None)]),
+
+# Grouped so the index reads as an argument rather than a list of links.
+# (group title, group blurb, [(id, label, image class, [(page, lo, hi), ...]), ...])
+GROUPS = [
+    ("Why we are here", "The organisation, the ground it is trying to buy, and whose country it is.", [
+        ("vision",   "Vision and mission",     "img-girl",     [("about-us", 1, 14)]),
+        ("land",     "The land",               "img-land",     [("wallum", 0, None)]),
+        ("culture",  "Cultural significance",  "img-canopy",   [(ECO, 1, 4)]),
+    ]),
+    ("The living world", "What is actually on the site, species by species.", [
+        ("biodiv",   "Biodiversity",           "img-hero",      [(ECO, 5, 44)]),
+        ("koala",    "Koala",                  "img-trees",    [(ECO, 45, 52)]),
+        ("cockatoo", "Glossy black-cockatoo",  "img-cockatoo", [(ECO, 53, 56)]),
+        ("water",    "Water and the froglet",  "img-frog",     [(ECO, 57, None)]),
+    ]),
+    ("Taking part", "How the purchase is funded, who stands behind it, and how to join.", [
+        ("donate",   "Donate",                 "img-flower",   [("pledge", 0, 8)]),
+        ("pledge",   "Pledge and endorsements","img-dusk",     [("pledge", 9, None)]),
+        ("member",   "Membership and contact", "img-gather",   [("membership", 0, None),
+                                                                ("contact-us", 0, None)]),
+        ("team",     "Team and advisors",      "img-heath",     [("about-us", 15, None)]),
+    ]),
 ]
+SECTIONS = [sec for _t, _b, secs in GROUPS for sec in secs]
+
+# Facts worth catching the eye on a page this long. Bolded on first appearance
+# within a section only — these are CLAI's own words, not added emphasis.
+KEY = [
+    "9 EPBC Federally-listed Threatened Species", "12 NSW listed Threatened Species",
+    "9 Federal EPBC listed Threatened Species", "last 1% of Wallum heathland",
+    "124 residential lots", "Target: $35m in currency funds and Biodiversity Credits",
+    "Lot 13 DP1251383", "Conservation Land Trust", "in perpetuity",
+    "fully tax deductible", "Registered Charity",
+    "THIS IS NATIONAL HERITAGE; it is no place for bulldozers.",
+]
+LABEL = re.compile(r"^([A-Z][A-Za-z'&/,\- ]{2,46}):$")
+# "Bob Brown: I wholeheartedly endorse ..." — a name and its statement sharing
+# one paragraph. Split so the name becomes a heading you can scan for.
+INLINE = re.compile(r"^([A-Z][A-Za-z'&/,\- ]{2,46}):\s+(\S.*)$", re.S)
+SHOUT = re.compile(r"^[A-Z][A-Z '&\-]{3,46}$")
 
 DROP = {"about us", "contact us", "wallum heathland", "cultural heritage biodiversity",
         "read more", "home", "pledge", "membership", "donate", "join clai", "scroll to top"}
@@ -46,7 +69,7 @@ def render(page, lo, hi):
     """Blocks lo..hi of a page as HTML. The section's own heading is dropped —
     it has been promoted into the photographic header above it."""
     blocks = P[page][lo: (hi + 1) if hi is not None else None]
-    out, first = [], True
+    out, first, seen_keys = [], True, set()
     for b in blocks:
         t = b["text"].strip()
         if first and b["tag"] in ("h2", "h3"):
@@ -58,9 +81,25 @@ def render(page, lo, hi):
         if FORMY.search(t):
             continue
         e = html.escape(t, quote=False)
-        out.append(f"        <li>{e}</li>" if b["tag"] == "li"
-                   else f"        <h3>{e}</h3>" if b["tag"] in ("h2", "h3")
-                   else f"        <p>{e}</p>")
+        if b["tag"] == "li":
+            out.append(f"        <li>{e}</li>"); continue
+        if b["tag"] in ("h2", "h3"):
+            out.append(f"        <h3>{e}</h3>"); continue
+        m = LABEL.match(t)
+        if m:                      # "Endorsements:" — a heading in disguise
+            out.append(f"        <h3>{html.escape(m.group(1), quote=False)}</h3>"); continue
+        if SHOUT.match(t):         # "PLEDGE OF SUPPORT"
+            out.append(f"        <h3>{e}</h3>"); continue
+        m = INLINE.match(t)
+        if m:
+            out.append(f"        <h3>{html.escape(m.group(1), quote=False)}</h3>")
+            t, e = m.group(2), html.escape(m.group(2), quote=False)
+        for phrase in KEY:
+            p = html.escape(phrase, quote=False)
+            if p in e and p not in seen_keys:
+                e = e.replace(p, f"<strong>{p}</strong>", 1); seen_keys.add(p); break
+        cls = ' class="lead"' if not out else ""
+        out.append(f"        <p{cls}>{e}</p>")
     res, inlist = [], False
     for line in out:
         li = "<li>" in line
@@ -79,18 +118,41 @@ def words(page, lo, hi):
     return sum(len(x["text"].split()) for x in b)
 
 
-tiles = "\n".join(
-    f'        <a class="tile {img}" href="#{sid}"><b>{i:02d}</b><span>{html.escape(label)}</span></a>'
-    for i, (sid, label, img, _parts) in enumerate(SECTIONS, 1))
+n = 0
+index_groups, secs = [], []
+for gi, (gtitle, gblurb, gsecs) in enumerate(GROUPS, 1):
+    row = []
+    for sid, label, img, parts in gsecs:
+        n += 1
+        row.append(f'          <a class="tile {img}" href="#{sid}">'
+                   f'<b>{n:02d}</b><span>{html.escape(label)}</span></a>')
+    index_groups.append(f"""      <div class="group">
+        <div class="group-head">
+          <span class="group-num">{gi:02d}</span>
+          <h3>{html.escape(gtitle)}</h3>
+          <p>{html.escape(gblurb)}</p>
+        </div>
+        <div class="tiles tiles--{len(gsecs)}">
+{chr(10).join(row)}
+        </div>
+      </div>""")
 
-secs = []
-for i, (sid, label, img, parts) in enumerate(SECTIONS, 1):
-    body = "\n".join(render(pg, lo, hi) for pg, lo, hi in parts)
-    wc = sum(words(pg, lo, hi) for pg, lo, hi in parts)
-    srcs = " &middot; ".join(f"clai.au/{pg}" for pg, _l, _h in parts)
-    secs.append(f"""  <section class="sechead {img}" id="{sid}">
+    secs.append(f"""  <section class="band groupband" id="g{gi}">
+    <div class="inner">
+      <span class="group-num">{gi:02d}</span>
+      <h2>{html.escape(gtitle)}</h2>
+      <p>{html.escape(gblurb)}</p>
+    </div>
+  </section>""")
+
+    for k, (sid, label, img, parts) in enumerate(gsecs, 1):
+        body = "\n".join(render(pg, lo, hi) for pg, lo, hi in parts)
+        wc = sum(words(pg, lo, hi) for pg, lo, hi in parts)
+        srcs = " &middot; ".join(f"clai.au/{pg}" for pg, _l, _h in parts)
+        idx = sum(len(g[2]) for g in GROUPS[:gi-1]) + k
+        secs.append(f"""  <section class="sechead {img}" id="{sid}">
     <div class="sechead-in">
-      <span class="num">{i:02d}</span>
+      <span class="num">{idx:02d} &middot; {html.escape(gtitle)}</span>
       <h2>{html.escape(label)}</h2>
     </div>
   </section>
@@ -165,12 +227,11 @@ page_html = f"""<!--BRAND-->
     <div class="inner">
       <div class="index-head">
         <p class="eyebrow">Contents</p>
-        <h2>{len(SECTIONS)} sections</h2>
-        <p>Every heading on CLAI's site, in one place. Tap any one to go straight to it.</p>
+        <h2>Everything on this page</h2>
+        <p>CLAI's {total:,} words, grouped into {len(SECTIONS)} sections. Tap any one to go
+          straight to it.</p>
       </div>
-      <div class="tiles">
-{tiles}
-      </div>
+{chr(10).join(index_groups)}
     </div>
   </section>
 

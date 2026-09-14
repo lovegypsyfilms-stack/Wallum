@@ -710,3 +710,48 @@
   .sechead + .doc .inner{ padding-block:clamp(24px,3vw,36px) clamp(34px,4.4vw,56px); }
   .sechead + .doc .sec{ padding-block:0; }
   .sechead + .doc .sec + .sec{ border-top:0; }
+
+  /* ================= GROUPED INDEX ================= */
+  .index .inner{ gap:clamp(26px,3.4vw,40px); }
+  .group{ display:grid; gap:14px; }
+  .group + .group{ border-top:1px solid rgba(214,190,130,.2); padding-top:clamp(22px,2.8vw,32px); }
+  .group-head{ display:grid; gap:5px; }
+  .group-num{
+    font-family:var(--display); font-weight:600; font-size:.7rem;
+    color:var(--brass); font-variant-numeric:tabular-nums;
+  }
+  .group-head h3{
+    font-family:var(--display); font-weight:700; font-size:clamp(1.05rem,2.3vw,1.4rem);
+    letter-spacing:-.01em; color:#F4EFE2; margin:0;
+  }
+  .group-head p{ color:rgba(239,234,220,.6); font-size:.86rem; max-width:58ch; }
+
+  /* one row per group on a wide screen */
+  .tiles{ grid-template-columns:repeat(2,1fr); }
+  @media(min-width:680px){ .tiles--3{ grid-template-columns:repeat(3,1fr); } }
+  @media(min-width:820px){ .tiles--4{ grid-template-columns:repeat(4,1fr); } }
+
+  /* ================= GROUP BAND (in the body) ================= */
+  .groupband{ background:var(--forest); }
+  .groupband .inner{
+    padding-block:clamp(30px,3.6vw,46px);
+    display:grid; gap:7px; justify-items:center; text-align:center;
+    scroll-margin-top:60px;
+  }
+  .groupband h2{
+    font-size:clamp(1.3rem,3.2vw,2rem); letter-spacing:-.015em; color:#F4EFE2;
+  }
+  .groupband p{ color:rgba(239,234,220,.62); font-size:.9rem; max-width:56ch; }
+
+  /* ================= LONG-FORM READABILITY ================= */
+  .doc .lead{
+    font-size:clamp(1.04rem,1.5vw,1.18rem); line-height:1.5;
+    font-weight:500; color:var(--forest);
+  }
+  .doc strong{ font-weight:700; color:var(--forest); }
+  .doc h3{
+    margin-top:14px; padding-top:14px;
+    border-top:1px solid var(--rule-dark);
+  }
+  .doc .sec > h3:first-child{ margin-top:0; padding-top:0; border-top:0; }
+  .sechead .num{ letter-spacing:.04em; }
