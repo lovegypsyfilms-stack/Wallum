@@ -1,24 +1,88 @@
 #!/usr/bin/env python3
-"""Inline brand.css into each page.
+"""Build the Wallum site into one self-contained HTML file.
 
-brand.css is the single source of truth for the identity. Both versions share
-it, so a change to the brand is one edit here and a re-run of this script.
+Sources of truth:
+    brand.css              the identity, shared by both versions
+    src/index.html         Version B — reduced, brand-aligned copy
+    src/their-copy.html    Version A — CLAI's existing copy, verbatim
+    fonts/  photos/        assets
 
-It is inlined rather than linked because the sandboxes these pages get previewed
-in do not always apply an external stylesheet, which renders the site as raw
-unstyled HTML. Inlining removes that failure mode everywhere.
+Everything is folded into a single index.html: the stylesheet inlined, the
+fonts and photographs embedded as data: URIs, and both versions in the one
+document toggled by the switcher.
+
+It is built this way because preview sandboxes do not reliably serve a page's
+sub-resources — an external stylesheet renders as unstyled HTML, missing
+images render as blank panels, and a link to a second HTML file goes nowhere.
+A single file with nothing external has none of those failure modes.
 
     python3 build.py
 """
-import pathlib
+import base64, pathlib, re
 
 root = pathlib.Path(__file__).parent
-css = (root / "brand.css").read_text(encoding="utf-8")
+MIME = {".woff2": "font/woff2", ".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".png": "image/png"}
 
-for name in ("index.html", "their-copy.html"):
+
+def embed(css: str) -> str:
+    """Replace every url("fonts/…") / url("photos/…") with a data: URI."""
+    def sub(m):
+        rel = m.group(1).strip()
+        p = root / rel
+        if not p.exists():
+            raise SystemExit(f"brand.css references {rel}, which does not exist")
+        b64 = base64.b64encode(p.read_bytes()).decode("ascii")
+        return f'url("data:{MIME[p.suffix.lower()]};base64,{b64}")'
+    return re.sub(r'url\(\s*["\']?((?:fonts|photos)/[^"\')]+)["\']?\s*\)', sub, css)
+
+
+def body(name: str) -> str:
+    """Everything after the <!--BRAND--> marker, minus the old switcher."""
     src = (root / "src" / name).read_text(encoding="utf-8")
     if "<!--BRAND-->" not in src:
         raise SystemExit(f"src/{name} is missing the <!--BRAND--> marker")
-    out = src.replace("<!--BRAND-->", "<style>\n" + css + "\n</style>", 1)
-    (root / name).write_text(out, encoding="utf-8")
-    print(f"built {name}  ({len(out):,} bytes)")
+    out = src.split("<!--BRAND-->", 1)[1]
+    return re.sub(r'(?s)<nav class="vswitch".*?</nav>', "", out).strip()
+
+
+css = embed((root / "brand.css").read_text(encoding="utf-8"))
+
+page = f"""<title>Wallum Be Here</title>
+<style>
+{css}
+</style>
+
+<div class="ver" id="ver-b">
+{body("index.html")}
+</div>
+
+<div class="ver" id="ver-a" hidden>
+{body("their-copy.html")}
+</div>
+
+<nav class="vswitch" aria-label="Pitch version">
+  <b>Version</b>
+  <button type="button" id="to-b" aria-current="page">B &middot; Reduced</button>
+  <button type="button" id="to-a">A &middot; Full CLAI copy</button>
+</nav>
+
+<script>
+  (function () {{
+    var vb = document.getElementById("ver-b"), va = document.getElementById("ver-a");
+    var bb = document.getElementById("to-b"), ba = document.getElementById("to-a");
+    function show(which) {{
+      var b = which === "b";
+      vb.hidden = !b; va.hidden = b;
+      if (b) {{ bb.setAttribute("aria-current", "page"); ba.removeAttribute("aria-current"); }}
+      else   {{ ba.setAttribute("aria-current", "page"); bb.removeAttribute("aria-current"); }}
+      window.scrollTo(0, 0);
+    }}
+    bb.addEventListener("click", function () {{ show("b"); }});
+    ba.addEventListener("click", function () {{ show("a"); }});
+  }})();
+</script>
+"""
+out = root / "index.html"
+out.write_text(page, encoding="utf-8")
+(root / "their-copy.html").unlink(missing_ok=True)
+print(f"built index.html  ({len(page):,} bytes, {len(page)/1048576:.2f} MB) — one file, nothing external")

@@ -547,16 +547,17 @@
     font-family:var(--body); font-weight:600; font-size:.56rem; letter-spacing:.16em;
     text-transform:uppercase; color:var(--brass-lt); margin-right:8px; white-space:nowrap;
   }
-  .vswitch a{
+  .vswitch a,.vswitch button{
+    border:0; background:none; cursor:pointer; font-family:var(--body);
     font-family:var(--body); font-weight:600; font-size:.62rem; letter-spacing:.06em;
     text-decoration:none; color:rgba(239,234,220,.7); padding:.6em 1em; white-space:nowrap;
   }
-  .vswitch a:hover{ color:#fff; }
-  .vswitch a[aria-current]{ background:var(--moss); color:#F6F2E7; }
+  .vswitch a:hover,.vswitch button:hover{ color:#fff; }
+  .vswitch a[aria-current],.vswitch button[aria-current]{ background:var(--moss); color:#F6F2E7; }
   @media(max-width:520px){
     .vswitch b{ display:none; }
     .vswitch{ padding-left:5px; }
-    .vswitch a{ font-size:.58rem; padding:.6em .7em; }
+    .vswitch a,.vswitch button{ font-size:.58rem; padding:.6em .7em; }
   }
   body{ padding-bottom:44px; }
 
