@@ -1,28 +1,27 @@
 # Photography
 
-**Everything in this folder is a placeholder.** Each file is a crop taken from
-the original AI-generated design mockup, upscaled. They are low resolution,
-they are not photographs of Wallum, and they are not licensed for publication.
+Twelve slots, filled from nine supplied photographs at 900–1500px wide.
+These replaced the crops previously taken from the design mockup.
 
-They are here so the site can be shown and judged as a whole. Replace each one
-with the real shot and keep the filename — nothing in the CSS needs editing.
+Three slots still reuse a photograph used elsewhere, because nine images do
+not cover twelve slots plus eleven index tiles:
 
-**Do not launch with these files.**
+- `heath.jpg` and `heath-dusk.jpg` are the same coastal-heath frame
+- `canopy.jpg` and `girl.jpg` are the same frame of the sand flats
+- `bark.jpg` and `trees.jpg` are the same misty forest interior
 
-## How to add one
+Three more images would clear all of it. In priority order: **a koala**
+(currently headed by forest, which is a stand-in rather than an answer),
+**the team** (a real photograph of the people involved would be far stronger
+than any landscape), and **one more wide landscape** to separate the
+duplicated pairs above.
 
-1. Drop the file in this folder.
-2. Open `index.html`, find the **PHOTOGRAPHY SWITCHBOARD** at the top of the
-   `<style>` block, and uncomment the matching line.
+Still outstanding: the three `face-*.jpg` portraits in the gathering section
+are the last crops left from the mockup. They are generated faces on a page
+asking for money, which is a credibility risk rather than a cosmetic one.
+Replace them with photographs of real supporters, or cut the row.
 
-That's the whole job. The gradient steps aside on its own.
-
-```css
-/* --photo-hero:      url("photos/hero-dawn.jpg"); */   ← before
-   --photo-hero:      url("photos/hero-dawn.jpg");      ← after
-```
-
-## Shot list
+## Shot list## Shot list
 
 | Variable | Filename | Shot | Ratio / size |
 |---|---|---|---|

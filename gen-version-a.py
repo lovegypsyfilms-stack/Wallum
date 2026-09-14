@@ -25,7 +25,7 @@ GROUPS = [
     ("Why we are here", [
         ("vision",   "Vision and mission",     "img-girl",     [("about-us", 1, 14)]),
         ("land",     "The land",               "img-land",     [("wallum", 0, None)]),
-        ("culture",  "Cultural significance",  "img-canopy",   [(ECO, 1, 4)]),
+        ("culture",  "Cultural significance",  "img-heath",    [(ECO, 1, 4)]),
     ]),
     ("The living world", [
         ("biodiv",   "Biodiversity",           "img-hero",      [(ECO, 5, 44)]),
@@ -38,7 +38,7 @@ GROUPS = [
         ("pledge",   "Pledge and endorsements","img-dusk",     [("pledge", 9, None)]),
         ("member",   "Membership and contact", "img-gather",   [("membership", 0, None),
                                                                 ("contact-us", 0, None)]),
-        ("team",     "Team and advisors",      "img-heath",     [("about-us", 15, None)]),
+        ("team",     "Team and advisors",      "img-canopy",    [("about-us", 15, None)]),
     ]),
 ]
 SECTIONS = [sec for _t, secs in GROUPS for sec in secs]
