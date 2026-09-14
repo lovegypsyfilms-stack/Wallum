@@ -161,7 +161,7 @@
   /* ================= NAV ================= */
   .nav{
     position:sticky; top:0; z-index:50;
-    background:linear-gradient(180deg, rgba(18,26,19,.72) 0%, rgba(18,26,19,0) 100%);
+    background:linear-gradient(180deg, rgba(14,22,15,.88) 0%, rgba(14,22,15,.5) 58%, rgba(14,22,15,0) 100%);
     backdrop-filter:blur(3px);
   }
   .nav-in{
@@ -206,7 +206,7 @@
       linear-gradient(180deg,
         #B9C4BC 0%, #D9D5C0 13%, #EDE2C7 26%, #F4E9CE 41%, #F2E7C9 57%,
         #E1D9B8 71%, #B3B792 83%, #74805F 93%, #3D4A31 100%);
-    background-size:cover; background-position:26% center;
+    background-size:cover; background-position:center 42%;
   }
   .hero-mist{
     position:absolute; inset:0; z-index:1; pointer-events:none;
@@ -245,11 +245,11 @@
   .behere{
     text-shadow:0 1px 12px rgba(249,245,233,.9);
     font-family:var(--body);
-    font-size:clamp(.9rem,2.5vw,1.55rem);   /* held well under the wordmark */
-    letter-spacing:.38em; text-indent:.38em;
+    font-size:clamp(1.32rem,4.3vw,3rem);   /* the call to action; still under the wordmark */
+    letter-spacing:.3em; text-indent:.3em;
     font-weight:700;
     color:var(--moss);
-    margin-top:clamp(16px,2vw,24px);
+    margin-top:clamp(18px,2.2vw,28px);
     text-transform:uppercase;
   }
 

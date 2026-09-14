@@ -47,7 +47,8 @@ def body(name: str) -> str:
 
 css = embed((root / "brand.css").read_text(encoding="utf-8"))
 
-page = f"""<title>Wallum Be Here</title>
+page = f"""<meta charset="utf-8">
+<title>Wallum Be Here</title>
 <style>
 {css}
 </style>
