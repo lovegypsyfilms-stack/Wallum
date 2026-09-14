@@ -3,13 +3,34 @@
 Campaign site for the acquisition and permanent protection of Wallum, a coastal
 wetland on Bundjalung country in northern New South Wales.
 
-## Running it
+## The two versions
 
-Open `index.html` in a browser. That's it — there's no build step, no bundler,
-no dependencies. `index.html` is the whole app: CSS in one `<style>`, a short
-`<script>` at the bottom.
+- **`index.html`** — Version B. The reduced, brand-aligned site. ~616 words.
+- **`their-copy.html`** — Version A. CLAI's existing website copy, verbatim,
+  inside the same identity. ~6,509 words.
 
-The only other files that ship are the fonts and (once they exist) the photos.
+A switcher pinned to the bottom of both flips between them. It is pitch
+scaffolding — delete `<nav class="vswitch">` from `src/` before launch.
+
+## Editing it
+
+`brand.css` is the single source of truth for the identity, shared by both
+versions. The page bodies live in `src/`. After changing either, run:
+
+```bash
+python3 build.py
+```
+
+That inlines `brand.css` into `src/index.html` and `src/their-copy.html` and
+writes the two files at the repo root, which are what actually get served.
+
+**Edit `brand.css` and `src/`, never the root HTML files** — the build
+overwrites them.
+
+Why inline rather than `<link>`: preview sandboxes do not reliably apply an
+external stylesheet, and when they don't the site renders as raw unstyled
+HTML. Inlining removes that failure mode. There are no other dependencies and
+no bundler.
 
 ## Deploying
 
