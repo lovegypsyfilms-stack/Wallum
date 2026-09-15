@@ -1537,3 +1537,7 @@
      reads as the same weight in a different colour. */
   .living-lede strong{ font-weight:700; color:#F6F2E7; }
   .ground-sub strong{ font-weight:700; color:#F6F2E7; }
+
+  /* the lede is two statements on two lines, so it needs the room to hold
+     the second one unbroken rather than the 58ch measure it inherited */
+  .living-lede{ max-width:72ch; }

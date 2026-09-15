@@ -1544,6 +1544,10 @@
   .living-lede strong{ font-weight:700; color:#F6F2E7; }
   .ground-sub strong{ font-weight:700; color:#F6F2E7; }
 
+  /* the lede is two statements on two lines, so it needs the room to hold
+     the second one unbroken rather than the 58ch measure it inherited */
+  .living-lede{ max-width:72ch; }
+
 </style>
 
 <div class="ver" id="ver-b">
@@ -1642,8 +1646,8 @@
   <section class="band living" id="living">
     <div class="inner">
       <h2 class="section-title">A living world.</h2>
-      <p class="living-lede"><strong>30 hectares is all that remains.</strong> A development has
-        been approved that will effectively wipe it out forever.</p>
+      <p class="living-lede"><strong>30 hectares is all that remains.</strong><br>
+        A development has been approved that will effectively wipe it out forever.</p>
     </div>
 
     <div class="cards">
@@ -1816,14 +1820,18 @@
         <path d="M24 22c-4.6 0-7.2-2.9-7.2-7 4.3 0 7.2 2.6 7.2 7Z"/>
         <path d="M24 19.5c4.6 0 7.2-2.9 7.2-7-4.3 0-7.2 2.6-7.2 7Z"/>
       </svg>
+
       <h1 class="wordmark rise">Wallum</h1>
       <p class="hero-onepc rise">The last one per cent</p>
+      <p class="hero-onepc-sub rise">Of the <strong>Wallum heathland</strong> left in the Byron Shire.</p>
       <div class="hero-rule rise" aria-hidden="true"><i></i><b></b><i></i></div>
+
       <p class="creed rise">
         <span>A living world that belongs to all of us.</span>
-        <span>A place to come together.</span>
       </p>
+
       <p class="behere rise">Be here</p>
+
       <form class="join rise">
         <label class="sr">Your name<span hidden></span></label>
         <input name="name" type="text" required placeholder="Your name" autocomplete="name">
@@ -1831,8 +1839,7 @@
         <p role="status" class="join-msg"></p>
       </form>
       <p class="join-alt rise">or <a href="#donate">give now</a> to help acquire and protect Wallum</p>
-      <p class="hero-what rise">Below: CLAI's existing website copy, unedited &mdash; 6,509 words
-        across 11 sections.</p>
+
     </div>
   </section>
 
