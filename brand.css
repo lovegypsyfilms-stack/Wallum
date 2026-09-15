@@ -58,6 +58,7 @@
     --photo-girl:      url("photos/girl.jpg");
     --photo-hero-dawn: url("photos/hero-girl-dawn.jpg");
     --photo-hero-frog: url("photos/hero-girl-frog.jpg");
+    --photo-bobbrown:  url("photos/bob-brown.jpg");
     --photo-trees:     url("photos/trees.jpg");
     --photo-face-1:    url("photos/face-1.jpg");
     --photo-face-2:    url("photos/face-2.jpg");
@@ -981,3 +982,117 @@
   /* the hero picker sits with the version switcher */
   .vswitch .sep{ width:1px; align-self:stretch; background:rgba(214,190,130,.3); margin-inline:6px; }
   .vswitch .hero-pick{ padding-inline:.85em; }
+
+  /* ================= THE LAST ONE PER CENT ================= */
+  /* The single fact that says what is at stake. It gets its own ground. */
+  .onepc-band{ background:var(--forest); color:#F4EFE2; }
+  .onepc-band .inner{
+    padding-block:clamp(44px,5.6vw,76px);
+    display:grid; gap:10px; justify-items:center; text-align:center;
+  }
+  .onepc-kicker{
+    font-family:var(--body); font-weight:700; font-size:.66rem;
+    letter-spacing:.24em; text-transform:uppercase; color:var(--brass);
+  }
+  .onepc-title{
+    font-family:var(--display); font-weight:800;
+    font-size:clamp(2.1rem,6.4vw,4.4rem); line-height:1.02;
+    letter-spacing:-.03em; color:#F6F2E7;
+  }
+  .onepc-line{
+    margin-top:4px; max-width:54ch;
+    font-size:clamp(.98rem,1.4vw,1.1rem); line-height:1.55;
+    color:rgba(244,239,226,.82);
+  }
+
+  /* ================= ACQUISITION, STRIPPED BACK ================= */
+  .act h2{ margin-bottom:4px; }
+  .act-total{
+    margin-top:4px; font-size:.92rem; line-height:1.5; color:var(--sage-dim);
+    max-width:46ch;
+  }
+  .act-total strong{ font-weight:700; color:var(--moss); }
+
+  /* ================= THE WALL ================= */
+  .wall{
+    list-style:none; margin:0; padding:0; width:100%;
+    display:grid; gap:8px; grid-template-columns:repeat(2,1fr);
+  }
+  @media(min-width:560px){ .wall{ grid-template-columns:repeat(3,1fr); } }
+  @media(min-width:900px){ .wall{ grid-template-columns:repeat(5,1fr); } }
+  .wtile{
+    position:relative; overflow:hidden;
+    min-height:clamp(88px,10vw,118px);
+    display:flex; flex-direction:column; justify-content:flex-end; gap:1px;
+    padding:11px 12px;
+    background:rgba(244,239,226,.06);
+    border:1px solid rgba(214,190,130,.22);
+  }
+  .wname{
+    font-family:var(--body); font-weight:700; font-size:.78rem; line-height:1.2;
+    color:#F4EFE2; position:relative; z-index:2;
+  }
+  .wplace{
+    font-family:var(--body); font-weight:500; font-size:.66rem;
+    color:rgba(239,234,220,.6); position:relative; z-index:2;
+  }
+  .wtile--photo{ background-size:cover; background-position:center 22%; }
+  .wtile--photo::after{
+    content:""; position:absolute; inset:0; z-index:1;
+    background:linear-gradient(180deg, rgba(10,16,10,.15) 0%, rgba(10,16,10,.55) 55%, rgba(8,13,8,.88) 100%);
+  }
+  .w1{ background-image:var(--photo-face-1); }
+  .w2{ background-image:var(--photo-face-2); }
+  .w3{ background-image:var(--photo-face-3); }
+  .wtile--biz{ border-color:rgba(214,190,130,.45); background:rgba(181,144,79,.1); }
+  .wchip{
+    position:absolute; top:10px; left:12px; z-index:2;
+    font-family:var(--body); font-weight:700; font-size:.52rem; letter-spacing:.16em;
+    text-transform:uppercase; color:var(--brass-lt);
+  }
+  .wtile--open{ border-style:dashed; border-color:rgba(214,190,130,.4); padding:0; }
+  .wtile--open a{
+    display:flex; align-items:center; justify-content:center; height:100%;
+    font-family:var(--body); font-weight:700; font-size:.72rem; letter-spacing:.04em;
+    color:var(--brass-lt); text-decoration:none; text-align:center; padding:11px;
+  }
+  .wtile--open a:hover{ color:#fff; background:rgba(214,190,130,.1); }
+  .wall-note{
+    margin-top:14px; font-size:.78rem; font-style:italic;
+    color:rgba(239,234,220,.55); text-align:center; width:100%;
+  }
+  .gather .inner{ grid-template-columns:1fr; text-align:center; }
+  .gather-copy{ justify-items:center; }
+
+  /* ================= ENDORSEMENT ================= */
+  .portrait-fig{ margin:0; display:grid; gap:8px; justify-items:center; }
+  @media(min-width:760px){ .portrait-fig{ justify-items:start; } }
+  .portrait{ background-position:center 18%; }
+  .credit{
+    font-size:.6rem; line-height:1.5; color:var(--sage);
+    max-width:20ch; text-align:center;
+  }
+  @media(min-width:760px){ .credit{ text-align:left; } }
+  .credit a{ color:var(--sage-dim); }
+
+  /* ================= THE LAST WORD ================= */
+  .closing .inner{ padding-block:clamp(64px,9vw,120px); }
+  .last-word{ margin:0; max-width:34ch; }
+  .last-word p{
+    font-family:var(--display); font-weight:700;
+    font-size:clamp(1.3rem,3.2vw,2.05rem); line-height:1.35;
+    letter-spacing:-.018em; color:#F4EFE2;
+    text-shadow:0 2px 22px rgba(0,0,0,.6);
+  }
+  .last-word p::before{ content:"\201C"; }
+  .last-word p::after{ content:"\201D"; }
+
+  /* the quote block was floating in its own column — pull it together */
+  .endorse-in{ align-items:center; }
+  .pull{ gap:12px; }
+  @media(min-width:760px){
+    .pull{ text-align:left; justify-items:start; }
+    .pull p{ text-align:left; }
+  }
+  .endorse .inner:last-child{ padding-top:clamp(18px,2.2vw,26px); }
+  .endorse .endorse-in{ padding-bottom:0; }
