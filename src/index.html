@@ -36,6 +36,7 @@
       </svg>
 
       <h1 class="wordmark rise">Wallum</h1>
+      <p class="hero-onepc rise">The last one per cent</p>
       <div class="hero-rule rise" aria-hidden="true"><i></i><b></b><i></i></div>
 
       <p class="creed rise">
@@ -57,21 +58,13 @@
     </div>
   </section>
 
-  <!-- ================= THE LAST ONE PER CENT ================= -->
-  <section class="band onepc-band">
-    <div class="inner">
-      <p class="onepc-kicker">This is what is left</p>
-      <h2 class="onepc-title">The last one per cent</h2>
-      <p class="onepc-line">Thirty hectares on Simpson's Creek at Brunswick Heads &mdash; all that
-        remains of the wallum heathland and woodland in Byron Shire. A housing estate is approved
-        over the top of it.</p>
-    </div>
-  </section>
-
   <!-- ================= LIVING WORLD ================= -->
   <section class="band living" id="living">
     <div class="inner">
       <h2 class="section-title">A living world.</h2>
+      <p class="living-lede">Thirty hectares on Simpson's Creek at Brunswick Heads &mdash; all that
+        remains of the wallum heathland and woodland in Byron Shire. A housing estate is approved
+        over the top of it.</p>
     </div>
 
     <div class="cards">
@@ -96,36 +89,29 @@
     </div>
   </section>
 
-  <!-- ================= ACQUISITION ================= -->
+  <!-- ================= GIVE ================= -->
   <section class="band act" id="act">
-    <div class="inner">
-      <div class="act-land"></div>
-      <div class="act-panel">
-        <p class="eyebrow">The acquisition</p>
-        <h2>Buy it. Hold it. For good.</h2>
+    <div class="inner act-simple">
+      <h2 class="give-title">Give now</h2>
 
-        <div class="amounts" role="group" aria-label="Choose an amount">
-          <button class="amount" type="button" aria-pressed="false" data-amt="20">$20</button>
-          <button class="amount" type="button" aria-pressed="false" data-amt="50">$50</button>
-          <button class="amount" type="button" aria-pressed="false" data-amt="100">$100</button>
-          <button class="amount" type="button" aria-pressed="false" data-amt="other">Other</button>
-        </div>
-        <div id="otherWrap" hidden>
-          <label for="otherAmt" class="aud">AUD</label>
-          <input id="otherAmt" name="other" type="number" min="1" step="1" inputmode="numeric" placeholder="Amount">
-        </div>
-
-        <div class="act-actions">
-          <!-- TODO: DONATE_URL -->
-          <a class="btn btn--solid" id="giveBtn" href="#act">Give now</a>
-          <a class="btn btn--ghost" href="#steward-page" data-view="s">How it is held</a>
-        </div>
-
-        <p class="act-total">Together we are raising <strong>$60 million</strong> to buy Wallum
-          outright and hold it in perpetuity.</p>
+      <div class="amounts" role="group" aria-label="Choose an amount">
+        <button class="amount" type="button" aria-pressed="false" data-amt="20">$20</button>
+        <button class="amount" type="button" aria-pressed="false" data-amt="50">$50</button>
+        <button class="amount" type="button" aria-pressed="false" data-amt="100">$100</button>
+        <button class="amount" type="button" aria-pressed="false" data-amt="other">Other</button>
       </div>
-      <div class="act-flower"></div>
+      <div id="otherWrap" hidden>
+        <label for="otherAmt" class="aud">AUD</label>
+        <input id="otherAmt" name="other" type="number" min="1" step="1" inputmode="numeric" placeholder="Amount">
+      </div>
+
+      <div class="act-actions">
+        <!-- TODO: DONATE_URL -->
+        <a class="btn btn--solid" id="giveBtn" href="#act">Give now</a>
+        <a class="btn btn--ghost" href="#steward-page" data-view="s">How it is held</a>
+      </div>
     </div>
+    <div class="act-flower"></div>
   </section>
 
   <!-- ================= GATHERING ================= -->
@@ -163,19 +149,13 @@
   <!-- ================= ENDORSEMENT ================= -->
   <section class="band endorse">
     <div class="inner endorse-in">
-      <figure class="portrait-fig">
-        <div class="portrait" role="img" aria-label="Bob Brown"></div>
-        <figcaption class="credit">Photograph by Jes, Melbourne &middot;
-          <a href="https://creativecommons.org/licenses/by-sa/2.0/" rel="license">CC BY-SA 2.0</a>
-          &middot; cropped</figcaption>
-      </figure>
       <blockquote class="pull">
         <p>&ldquo;This is national heritage. It is no place for bulldozers.&rdquo;</p>
         <cite>Bob Brown</cite>
       </blockquote>
+      <div class="portrait" role="img" aria-label="Bob Brown"></div>
     </div>
     <div class="inner">
-      <p class="eyebrow" style="text-align:center">Also endorsed by</p>
       <ul class="endorsers">
         <li>Rainforest Rescue</li><li>Total Environment Centre</li><li>Biodiversity Legacy</li>
         <li>Doctors for the Environment Australia</li><li>Wildlife Preservation Clarence Valley</li>
@@ -219,6 +199,9 @@
     <p class="foot-ack">We acknowledge the Bundjalung people as the Traditional Owners of the land
       and waters of Wallum, and pay respect to Elders past and present.</p>
     <p class="foot-tag">Land &middot; People &middot; A shared tomorrow</p>
+    <p class="foot-credit">Portrait of Bob Brown by Jes, Melbourne &middot;
+      <a href="https://creativecommons.org/licenses/by-sa/2.0/" rel="license">CC BY-SA 2.0</a>
+      &middot; cropped and desaturated</p>
   </div>
 </footer>
 

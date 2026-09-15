@@ -1107,3 +1107,80 @@
       radial-gradient(62% 56% at 50% 52%, rgba(10,16,10,.62) 0%, rgba(10,16,10,.46) 48%, rgba(10,16,10,.24) 80%, rgba(10,16,10,.16) 100%),
       linear-gradient(180deg, rgba(10,16,10,.7) 0%, rgba(10,16,10,.16) 26%, rgba(10,16,10,.26) 68%, rgba(8,13,8,.82) 100%);
   }
+
+  /* ================= HERO LOCKUP ================= */
+  /* WALLUM over the one line that says what is at stake. */
+  .hero-onepc{
+    margin-top:clamp(8px,1.1vw,14px);
+    font-family:var(--display); font-weight:700;
+    font-size:clamp(.92rem,2.1vw,1.45rem);
+    letter-spacing:.2em; text-indent:.2em; text-transform:uppercase;
+    color:var(--moss);
+    text-shadow:0 1px 4px rgba(249,245,233,1), 0 0 20px rgba(249,245,233,.95);
+  }
+  .hero--frog .hero-onepc{
+    color:var(--brass-lt);
+    text-shadow:0 1px 4px rgba(0,0,0,.85), 0 0 22px rgba(0,0,0,.7);
+  }
+  .hero-rule{ margin-top:clamp(16px,2vw,24px); }
+  /* shift her left so the face clears the wordmark before it feathers out */
+  .hero--frog .hero-sky{ background-position:64% 44%; }
+  @media(max-width:700px){ .hero--frog .hero-sky{ background-position:60% 36%; } }
+
+  /* ================= LIVING WORLD LEDE ================= */
+  .living .inner:first-child{ display:grid; gap:14px; justify-items:center; }
+  .living-lede{
+    max-width:58ch; text-align:center;
+    font-size:clamp(.98rem,1.35vw,1.1rem); line-height:1.55; color:#3B4A38;
+  }
+
+  /* ================= GIVE ================= */
+  .act-simple{
+    display:grid; gap:clamp(18px,2.4vw,26px); justify-items:center; text-align:center;
+    padding-block:clamp(44px,5.6vw,76px) clamp(30px,3.6vw,44px);
+    max-width:640px;
+  }
+  .give-title{
+    font-family:var(--display); font-weight:800;
+    font-size:clamp(2.2rem,6.6vw,4.4rem); line-height:1;
+    letter-spacing:-.03em; color:var(--forest);
+  }
+  .act-simple .amounts{ width:100%; }
+  .act-simple .act-actions{ width:100%; justify-content:center; }
+  .act-flower{ grid-column:auto; min-height:clamp(150px,18vw,220px); }
+
+  /* ================= ENDORSEMENT BAND ================= */
+  /* A strip, not a section: quote left, his face right, black and white. */
+  .endorse-in{
+    display:grid; gap:clamp(18px,3vw,40px); align-items:center;
+    grid-template-columns:1fr; justify-items:center; text-align:center;
+    padding-block:clamp(26px,3.2vw,42px) 0;
+  }
+  @media(min-width:720px){
+    .endorse-in{ grid-template-columns:minmax(0,1fr) auto; justify-items:start; text-align:left; }
+  }
+  .endorse-in .portrait{
+    width:clamp(96px,11vw,132px); aspect-ratio:1/1; border-radius:50%;
+    border:1px solid rgba(30,51,32,.22);
+    background-size:cover; background-position:center 32%;
+    filter:grayscale(1) contrast(1.06);
+  }
+  .endorse-in .pull{ gap:8px; }
+  .endorse-in .pull p{ font-size:clamp(1.15rem,2.5vw,1.65rem); line-height:1.3; }
+  .endorse .inner:last-child{ padding-block:clamp(14px,1.8vw,20px) clamp(26px,3.2vw,40px); }
+  .endorsers{ font-size:.6rem; }
+  .endorsers li{ font-size:.6rem; color:var(--sage); }
+
+  .foot-credit{
+    font-size:.56rem; line-height:1.5; color:var(--sage);
+    grid-column:1/-1; text-align:center; margin-top:2px;
+  }
+  .foot-credit a{ color:var(--sage-dim); }
+
+  /* the two-column acquisition grid is gone with the aerial; this beats it */
+  .act .inner.act-simple{
+    grid-template-columns:minmax(0,1fr);
+    margin-inline:auto;
+  }
+  .act .inner.act-simple .amounts{ max-width:520px; }
+  .act .inner.act-simple .act-actions{ max-width:520px; }
