@@ -1,0 +1,5 @@
+# DRAFT SITE — not for indexing.
+# Delete this file at launch, and remove the <meta name="robots"> line from
+# build.py, or the finished site will stay invisible to search engines.
+User-agent: *
+Disallow: /

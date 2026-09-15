@@ -48,6 +48,9 @@ def body(name: str) -> str:
 css = embed((root / "brand.css").read_text(encoding="utf-8"))
 
 page = f"""<meta charset="utf-8">
+<!-- DRAFT. Remove the robots line below — and robots.txt — at launch, or the
+     finished site stays invisible to search engines. -->
+<meta name="robots" content="noindex, nofollow">
 <title>Wallum Be Here</title>
 <style>
 {css}

@@ -54,6 +54,19 @@ than running them through Jekyll.
 
 Pages takes about a minute after a push.
 
+## Before launch: make it findable
+
+This is a draft and it tells search engines so, in two places:
+
+- `<meta name="robots" content="noindex, nofollow">`, written by `build.py`
+- `robots.txt`, which disallows everything
+
+**Both have to go at launch**, or the finished site stays invisible to Google.
+They stop crawlers, not people — anyone with the URL still sees everything,
+so they are not a substitute for access control. GitHub Pages has no password
+option at all; if this ever needs to be genuinely private, it needs a host
+that offers HTTP auth.
+
 ## Before this goes live
 
 Four things are deliberately unset. Search `index.html` for `TODO`.
