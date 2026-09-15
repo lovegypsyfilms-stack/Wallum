@@ -1096,3 +1096,14 @@
   }
   .endorse .inner:last-child{ padding-top:clamp(18px,2.2vw,26px); }
   .endorse .endorse-in{ padding-bottom:0; }
+
+  /* full-resolution hero frame: 1672x941 as supplied, so the whole composition
+     is available — her face left of centre, the frog right of it, and the type
+     sitting in the darker ground between them */
+  .hero--frog .hero-sky{ background-position:center 42%; }
+  @media(max-width:700px){ .hero--frog .hero-sky{ background-position:38% 38%; } }
+  .hero--frog .hero-mist{
+    background:
+      radial-gradient(62% 56% at 50% 52%, rgba(10,16,10,.62) 0%, rgba(10,16,10,.46) 48%, rgba(10,16,10,.24) 80%, rgba(10,16,10,.16) 100%),
+      linear-gradient(180deg, rgba(10,16,10,.7) 0%, rgba(10,16,10,.16) 26%, rgba(10,16,10,.26) 68%, rgba(8,13,8,.82) 100%);
+  }
