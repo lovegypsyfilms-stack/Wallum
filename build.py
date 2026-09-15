@@ -36,6 +36,17 @@ def embed(css: str) -> str:
     return re.sub(r'url\(\s*["\']?((?:fonts|photos)/[^"\')]+)["\']?\s*\)', sub, css)
 
 
+HERO_RE = r'(?s)<section class="band grain hero hero--frog">.*?\n  </section>'
+
+
+def hero_of(markup: str) -> str:
+    """The hero section, as one block."""
+    m = re.search(HERO_RE, markup)
+    if not m:
+        raise SystemExit("could not find the hero section")
+    return m.group(0)
+
+
 def body(name: str) -> str:
     """Everything after the <!--BRAND--> marker, minus the old switcher."""
     src = (root / "src" / name).read_text(encoding="utf-8")
@@ -43,6 +54,22 @@ def body(name: str) -> str:
         raise SystemExit(f"src/{name} is missing the <!--BRAND--> marker")
     out = src.split("<!--BRAND-->", 1)[1]
     return re.sub(r'(?s)<nav class="vswitch".*?</nav>', "", out).strip()
+
+
+def share_hero(v2: str, v1: str) -> str:
+    """Give Version 2 Version 1's hero.
+
+    The two versions open on the same front page, and until now each carried
+    its own copy of it — which is exactly how Version 2's drifted, keeping a
+    creed line that had been cut and missing the explainer added since. The
+    hero is written once, in src/index.html, and grafted on here. Only the
+    one internal link differs: Version 2 has no #act section, its give block
+    is #donate.
+    """
+    hero = hero_of(v1).replace('href="#act"', 'href="#donate"')
+    if not re.search(HERO_RE, v2):
+        raise SystemExit("Version 2 has no hero to replace")
+    return re.sub(HERO_RE, lambda _: hero, v2, count=1)
 
 
 css = embed((root / "brand.css").read_text(encoding="utf-8"))
@@ -61,7 +88,7 @@ page = f"""<meta charset="utf-8">
 </div>
 
 <div class="ver" id="ver-a" hidden>
-{body("their-copy.html")}
+{share_hero(body("their-copy.html"), body("index.html"))}
 </div>
 
 <div class="ver" id="ver-s" hidden>

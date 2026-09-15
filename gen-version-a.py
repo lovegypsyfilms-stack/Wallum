@@ -190,6 +190,9 @@ page_html = f"""<!--BRAND-->
 </header>
 
 <main id="a-top">
+  <!-- This hero is a placeholder. build.py replaces it wholesale with the one
+       from src/index.html, because both versions open on the same front page
+       and keeping two copies is what let this one drift. Edit the hero there. -->
   <section class="band grain hero hero--frog">
     <div class="hero-sky"></div>
     <div class="hero-mist"></div>
