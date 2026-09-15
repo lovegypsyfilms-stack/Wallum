@@ -100,6 +100,33 @@ page = f"""<meta charset="utf-8">
           if (Math.abs(diff) < 0.4) break;
           ls += diff / n;
         }}
+
+        // The explainer under it fits the same measure, but by scale rather
+        // than by tracking: it is a sentence in mixed case, and the spacing
+        // it would take to stretch 335px to 484px would read as a caption
+        // pulled apart. Sized to fit, it simply sets to the width. Below a
+        // legible floor — a narrow phone — it gives up and wraps instead.
+        var exp = mark.parentNode.querySelector(".hero-onepc-sub");
+        if (!exp) return;
+        exp.style.whiteSpace = "nowrap";
+        exp.style.maxWidth = "none";
+        exp.style.fontSize = "";
+        var size = parseFloat(getComputedStyle(exp).fontSize);
+        var w = exp.getBoundingClientRect().width;
+        if (!w) return;
+        size *= target / w;
+        for (var p2 = 0; p2 < 4; p2++) {{
+          exp.style.fontSize = size + "px";
+          var d2 = target - exp.getBoundingClientRect().width;
+          if (Math.abs(d2) < 0.4) break;
+          size *= target / (target - d2);
+        }}
+        // A phone's lockup is only ~287px wide, and fitting the sentence into
+        // that drives it to ~12px — smaller than the size the phone deliberately
+        // scales everything up to. There it wraps at its own size instead.
+        if (size < 14) {{
+          exp.style.whiteSpace = ""; exp.style.maxWidth = ""; exp.style.fontSize = "";
+        }}
       }});
     }}
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitLockup);
