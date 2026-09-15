@@ -1520,6 +1520,23 @@
     }
   }
 
+  /* ===== The creed, lighter =====
+     Tracked open at display weight and display size it stopped reading as a
+     line and started reading as a wall — wide, but imposing with it. The
+     width is the point, so the width stays: the size comes down, the weight
+     comes off, and the tracking opens further to hold the measure. It should
+     sound like someone saying it, not like signage. */
+  .creed{
+    font-weight:500;
+    font-size:clamp(1.12rem,2.5vw,1.78rem);
+    letter-spacing:.16em; text-indent:.16em;
+    line-height:1.5;
+  }
+  @media(max-width:700px){
+    .creed{ font-size:1rem; letter-spacing:.1em; text-indent:.1em; }
+  }
+  @media(max-width:380px){ .creed{ font-size:.92rem; } }
+
 </style>
 
 <div class="ver" id="ver-b">
