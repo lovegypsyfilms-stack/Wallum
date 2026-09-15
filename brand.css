@@ -1436,3 +1436,7 @@
   .living{ background:var(--ink); color:#EFEADC; }
   .living .section-title{ color:#F6F2E7; }
   .living-lede{ color:rgba(239,234,220,.76); }
+
+  /* the named thing carries the weight in the lockup's sub-line */
+  .hero-onepc-sub strong{ font-weight:700; color:var(--moss); }
+  .hero--frog .hero-onepc-sub strong{ color:#F6F2E7; }
