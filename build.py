@@ -61,6 +61,10 @@ page = f"""<meta charset="utf-8">
 {body("their-copy.html")}
 </div>
 
+<div class="ver" id="ver-s" hidden>
+{(root / "src" / "stewardship.html").read_text(encoding="utf-8").strip()}
+</div>
+
 <nav class="vswitch" aria-label="Pitch version">
   <b>Version</b>
   <button type="button" id="to-b" aria-current="page">B &middot; Reduced</button>
@@ -69,17 +73,29 @@ page = f"""<meta charset="utf-8">
 
 <script>
   (function () {{
-    var vb = document.getElementById("ver-b"), va = document.getElementById("ver-a");
-    var bb = document.getElementById("to-b"), ba = document.getElementById("to-a");
+    var views = {{ b: document.getElementById("ver-b"),
+                   a: document.getElementById("ver-a"),
+                   s: document.getElementById("ver-s") }};
+    var tabs = {{ b: document.getElementById("to-b"), a: document.getElementById("to-a") }};
     function show(which) {{
-      var b = which === "b";
-      vb.hidden = !b; va.hidden = b;
-      if (b) {{ bb.setAttribute("aria-current", "page"); ba.removeAttribute("aria-current"); }}
-      else   {{ ba.setAttribute("aria-current", "page"); bb.removeAttribute("aria-current"); }}
+      Object.keys(views).forEach(function (k) {{ views[k].hidden = k !== which; }});
+      // stewardship lives under version B, so B stays marked while it is open
+      var lit = which === "s" ? "b" : which;
+      Object.keys(tabs).forEach(function (k) {{
+        if (k === lit) tabs[k].setAttribute("aria-current", "page");
+        else tabs[k].removeAttribute("aria-current");
+      }});
       window.scrollTo(0, 0);
     }}
-    bb.addEventListener("click", function () {{ show("b"); }});
-    ba.addEventListener("click", function () {{ show("a"); }});
+    tabs.b.addEventListener("click", function () {{ show("b"); }});
+    tabs.a.addEventListener("click", function () {{ show("a"); }});
+    // any link carrying data-view switches instead of navigating
+    document.addEventListener("click", function (e) {{
+      var el = e.target.closest("[data-view]");
+      if (!el) return;
+      e.preventDefault();
+      show(el.getAttribute("data-view"));
+    }});
   }})();
 </script>
 """

@@ -843,3 +843,103 @@
   }
   .creed{ text-shadow:0 1px 4px rgba(249,245,233,1), 0 0 22px rgba(249,245,233,.96); }
   .emblem{ filter:drop-shadow(0 1px 10px rgba(74,58,26,.55)); }
+
+  /* ================= HERO: creed, then the ask ================= */
+  .sr{ position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); }
+  .behere{ margin-top:clamp(20px,2.6vw,30px); }
+
+  .join{
+    display:flex; flex-wrap:wrap; gap:8px; justify-content:center;
+    width:min(100%,440px); margin-top:clamp(16px,2vw,22px);
+  }
+  .join input{
+    flex:1 1 200px; min-width:0;
+    font-family:var(--body); font-weight:500; font-size:1rem; padding:.9em 1em;
+    background:rgba(255,253,246,.94); color:var(--ink);
+    border:1px solid rgba(30,51,32,.34);
+  }
+  .join input::placeholder{ color:#6E7A67; }
+  .join .btn{ flex:0 0 auto; padding-inline:1.7em; }
+  .join-msg{
+    flex:1 0 100%; min-height:1.3em; margin-top:2px;
+    font-size:.86rem; font-weight:600; color:var(--moss);
+    text-shadow:0 1px 3px rgba(249,245,233,1), 0 0 12px rgba(249,245,233,1);
+  }
+  .join-alt{
+    margin-top:10px; font-size:.86rem; font-weight:600; color:#1B2615;
+    text-shadow:0 1px 3px rgba(249,245,233,1), 0 0 14px rgba(249,245,233,1);
+  }
+  .join-alt a{ color:var(--moss); text-underline-offset:3px; }
+
+  .onepc{
+    margin-top:clamp(30px,4vw,46px);
+    display:grid; gap:6px; max-width:44ch;
+  }
+  .onepc-head{
+    font-family:var(--display); font-weight:800;
+    font-size:clamp(.82rem,1.5vw,1rem); letter-spacing:.14em; text-transform:uppercase;
+    color:var(--moss);
+    text-shadow:0 1px 3px rgba(249,245,233,1), 0 0 14px rgba(249,245,233,1);
+  }
+  .onepc-sub{
+    font-weight:600; font-size:clamp(.92rem,1.2vw,1rem); line-height:1.5; color:#1B2615;
+    text-shadow:0 1px 3px rgba(249,245,233,1), 0 0 12px rgba(249,245,233,1), 0 0 30px rgba(249,245,233,.95);
+  }
+  .aud{
+    font-family:var(--body); font-weight:600; font-size:.7rem; letter-spacing:.13em;
+    text-transform:uppercase; color:var(--sage-dim);
+  }
+
+  /* ===== species cards: let the animal be the subject, not the backdrop ===== */
+  .card{ min-height:clamp(400px,44vw,540px); justify-content:flex-end; }
+  .card::after{
+    background:linear-gradient(180deg, rgba(12,18,12,.1) 0%, rgba(12,18,12,.16) 40%,
+                                        rgba(12,18,12,.6) 72%, rgba(8,13,8,.9) 100%);
+  }
+  .stat{ font-size:clamp(3.4rem,7.2vw,4.8rem); line-height:.92; }
+  .card--frog{ background-position:52% 34%; background-size:150% auto; }
+  .card--cockatoo{ background-position:44% 26%; background-size:145% auto; }
+  .card--heath{ background-position:center 42%; }
+
+  /* ===== gathering: heading and idea only ===== */
+  .gather .inner{ align-items:center; }
+  .gather-copy{ gap:12px; }
+
+  /* ===== endorsement with a portrait ===== */
+  .endorse-in{
+    display:grid; gap:clamp(20px,3vw,36px); justify-items:center; text-align:center;
+    padding-bottom:clamp(10px,1.4vw,16px);
+  }
+  @media(min-width:760px){
+    .endorse-in{ grid-template-columns:auto minmax(0,1fr); justify-items:start; text-align:left; }
+    .endorse-in .pull{ justify-items:start; }
+  }
+  .portrait{
+    width:clamp(112px,14vw,168px); aspect-ratio:4/5; flex:0 0 auto;
+    border:1px solid var(--rule);
+    background-image:var(--photo-bobbrown, linear-gradient(165deg,#5E6A52,#2A3126));
+    background-size:cover; background-position:center 28%;
+  }
+  .pull p{ font-size:clamp(1.25rem,2.9vw,1.85rem); line-height:1.32; letter-spacing:-.018em; }
+  .endorse .inner + .inner{ padding-top:0; }
+
+  /* ===== stewardship teaser + page ===== */
+  .steward-teaser{ display:grid; gap:16px; justify-items:center; }
+  .steward-teaser h2{ font-size:clamp(1.6rem,4vw,2.6rem); letter-spacing:-.02em; }
+  .steward-top .inner{ padding-block:clamp(40px,5vw,64px); }
+  .steward-top p{ color:rgba(239,234,220,.7); font-size:.95rem; max-width:56ch; }
+  .steward-top .group-num{ letter-spacing:.2em; text-transform:uppercase; }
+
+  /* zooming by width left the image short of the card, which tiled as a band
+     across the top — scale by height instead, and never repeat */
+  .card{ background-repeat:no-repeat; }
+  .card--frog{ background-size:auto 138%; background-position:50% 30%; }
+  .card--cockatoo{ background-size:auto 140%; background-position:46% 24%; }
+
+  /* keep more of her in frame, and stop the emblem disappearing into the sky */
+  .hero-sky{ background-position:30% 62%; }
+  @media(max-width:700px){ .hero-sky{ background-position:52% 58%; } }
+  .emblem{
+    color:#8A6C2E !important;
+    filter:drop-shadow(0 1px 3px rgba(255,252,242,.95)) drop-shadow(0 0 14px rgba(255,252,242,.9));
+  }
