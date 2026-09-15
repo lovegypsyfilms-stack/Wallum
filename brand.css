@@ -1480,3 +1480,36 @@
   /* the explainer may sit inside the lockup column but never overhang it —
      on a phone its natural single line ran wider than WALLUM above it */
   .hero-onepc-sub{ max-width:min(100%, var(--lockup-w, 480px)); margin-inline:auto; }
+
+  /* ===== The hero was dark twice over =====
+     The plate itself is backlit and sat low — that is lifted in the file — and
+     a heavy scrim was laid over it so light type would hold. With a brighter
+     plate underneath the scrim can come right back; the type keeps its footing
+     on its own text-shadows rather than on a curtain over the photograph. */
+  .hero--frog .hero-mist{
+    background:
+      radial-gradient(64% 58% at 50% 52%, rgba(10,16,10,.34) 0%, rgba(10,16,10,.24) 48%, rgba(10,16,10,.1) 80%, rgba(10,16,10,.04) 100%),
+      linear-gradient(180deg, rgba(10,16,10,.5) 0%, rgba(10,16,10,.06) 26%, rgba(10,16,10,.12) 68%, rgba(8,13,8,.6) 100%);
+  }
+  /* the type carries a little more of its own contrast now that the scrim is thin */
+  .hero--frog .wordmark,
+  .hero--frog .creed,
+  .hero--frog .behere{ text-shadow:0 2px 24px rgba(0,0,0,.82), 0 1px 5px rgba(0,0,0,.72); }
+
+  /* ===== The creed, tracked open =====
+     It is the one line the site turns on, so it gets set like a statement
+     rather than a sentence — the letters carry space between them and the
+     measure widens with them. */
+  .creed{ letter-spacing:.1em; text-indent:.1em; }
+  @media(max-width:700px){ .creed{ letter-spacing:.07em; text-indent:.07em; } }
+
+  /* The phone runs a different plate — a bright, high-key close-up — and the
+     type sits straight over her face rather than over open ground, so it keeps
+     more of the scrim than the desktop frame needs. */
+  @media(max-width:700px){
+    .hero--frog .hero-mist{
+      background:
+        radial-gradient(70% 58% at 50% 46%, rgba(10,16,10,.52) 0%, rgba(10,16,10,.4) 50%, rgba(10,16,10,.2) 82%, rgba(10,16,10,.1) 100%),
+        linear-gradient(180deg, rgba(10,16,10,.62) 0%, rgba(10,16,10,.14) 24%, rgba(10,16,10,.2) 66%, rgba(8,13,8,.72) 100%);
+    }
+  }
