@@ -40,18 +40,17 @@
       <div class="hero-rule rise" aria-hidden="true"><i></i><b></b><i></i></div>
 
       <p class="creed rise">
-        <span>A living world.</span>
-        <span>A shared inheritance.</span>
+        <span>A living world that belongs to all of us.</span>
         <span>A place to come together.</span>
       </p>
 
       <p class="behere rise">Be here</p>
 
-      <form class="join rise" id="joinForm">
-        <label for="joinName" class="sr">Your name</label>
-        <input id="joinName" name="name" type="text" required placeholder="Your name" autocomplete="name">
+      <form class="join rise">
+        <label class="sr">Your name<span hidden></span></label>
+        <input name="name" type="text" required placeholder="Your name" autocomplete="name">
         <button class="btn btn--solid" type="submit">I am here</button>
-        <p id="joinMsg" role="status" class="join-msg"></p>
+        <p role="status" class="join-msg"></p>
       </form>
       <p class="join-alt rise">or <a href="#act">give now</a> to help acquire and protect Wallum</p>
 
@@ -111,7 +110,6 @@
         <a class="btn btn--ghost" href="#steward-page" data-view="s">How it is held</a>
       </div>
     </div>
-    <div class="act-flower"></div>
   </section>
 
   <!-- ================= GATHERING ================= -->
@@ -122,25 +120,26 @@
         <h2>Come together.</h2>
         <p class="big-idea">Wallum becomes a place humanity gathers around.</p>
       </div>
-      <!-- PLACEHOLDER PEOPLE. Every name is invented and every portrait is
-           generated — some photographic, some illustrated, because the live
-           wall fills from whatever photo or avatar a person supplies on
-           joining. Clear them all before launch. -->
+      <!-- PLACEHOLDER PEOPLE. Names invented, portraits generated. Eleven
+           photographic and four illustrated, because the live wall fills from
+           whatever photo or avatar a person supplies. Illustrated sit at 2, 6, 8
+           and 12 so they never column-align at five across or three. Clear all
+           of them before launch. -->
       <ul class="wall" aria-label="People who are here">
         <li class="wtile w-tessa"><span class="wname">Tessa</span><span class="wplace">Byron Bay, NSW</span></li>
-        <li class="wtile w-mara"><span class="wname">Mara</span><span class="wplace">Noosa, QLD</span></li>
         <li class="wtile w-kai"><span class="wname">Kai</span><span class="wplace">Sunshine Coast, QLD</span></li>
+        <li class="wtile w-mara"><span class="wname">Mara</span><span class="wplace">Noosa, QLD</span></li>
         <li class="wtile w-amara"><span class="wname">Amara</span><span class="wplace">Gold Coast, QLD</span></li>
-        <li class="wtile w-lachlan"><span class="wname">Lachlan</span><span class="wplace">Bells Beach, VIC</span></li>
+        <li class="wtile w-tom"><span class="wname">Tom</span><span class="wplace">Grampians, VIC</span></li>
         <li class="wtile w-ravi"><span class="wname">Ravi</span><span class="wplace">Margaret River, WA</span></li>
-        <li class="wtile w-lily"><span class="wname">Lily</span><span class="wplace">Wollongong, NSW</span></li>
         <li class="wtile w-hugh"><span class="wname">Hugh</span><span class="wplace">Tasman Peninsula, TAS</span></li>
+        <li class="wtile w-lily"><span class="wname">Lily</span><span class="wplace">Wollongong, NSW</span></li>
+        <li class="wtile w-ros"><span class="wname">Ros</span><span class="wplace">Eden, NSW</span></li>
         <li class="wtile w-noah"><span class="wname">Noah</span><span class="wplace">Torquay, VIC</span></li>
+        <li class="wtile w-marlya"><span class="wname">Marlya</span><span class="wplace">Arrernte Country, NT</span></li>
         <li class="wtile w-leilani"><span class="wname">Leilani</span><span class="wplace">Garry Beach, NSW</span></li>
-        <li class="wtile w-orion"><span class="wname">Orion</span><span class="wplace">Fremantle, WA</span></li>
-        <li class="wtile w-mei"><span class="wname">Mei</span><span class="wplace">Kiama, NSW</span></li>
-        <li class="wtile w-zac"><span class="wname">Zac</span><span class="wplace">Evans Head, NSW</span></li>
         <li class="wtile w-nia"><span class="wname">Nia</span><span class="wplace">Bundjalung Country, NSW</span></li>
+        <li class="wtile w-mei"><span class="wname">Mei</span><span class="wplace">Kiama, NSW</span></li>
         <li class="wtile w-sophie"><span class="wname">Sophie</span><span class="wplace">Bellingen, NSW</span></li>
       </ul>
       <p class="wall-note">Every person who joins appears here.</p>
@@ -174,6 +173,7 @@
         again. Here is the structure that makes that binding rather than hopeful.</p>
       <a class="btn btn--outline" href="#steward-page" data-view="s">How it is held</a>
     </div>
+    <div class="steward-hands"></div>
   </section>
 
   <!-- ================= CLOSING ================= -->
@@ -218,22 +218,24 @@
         if (isOther) otherAmt.focus();
       });
     });
-    var form = document.getElementById("joinForm");
-    var msg = document.getElementById("joinMsg");
-    form.addEventListener("submit", function (e) {
-      e.preventDefault();
-      var name = document.getElementById("joinName").value.trim();
-      if (!name) return;
-      if (!SIGNUP_URL) { msg.textContent = "Thank you, " + name + ". Sign-ups open shortly."; return; }
-      msg.textContent = "Adding your name…";
-      fetch(SIGNUP_URL, { method: "POST", headers: { "Content-Type": "application/json" },
-                          body: JSON.stringify({ name: name }) })
-        .then(function (r) {
-          if (!r.ok) throw new Error(r.status);
-          msg.textContent = "Thank you, " + name + ". Your name is with Wallum.";
-          form.reset();
-        })
-        .catch(function () { msg.textContent = "That did not send. Please try again in a moment."; });
+    document.querySelectorAll(".join").forEach(function (form) {
+      var msg = form.querySelector(".join-msg");
+      var field = form.querySelector("input[name=name]");
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        var name = field.value.trim();
+        if (!name) return;
+        if (!SIGNUP_URL) { msg.textContent = "Thank you, " + name + ". Sign-ups open shortly."; return; }
+        msg.textContent = "Adding your name\u2026";
+        fetch(SIGNUP_URL, { method: "POST", headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({ name: name }) })
+          .then(function (r) {
+            if (!r.ok) throw new Error(r.status);
+            msg.textContent = "Thank you, " + name + ". Your name is with Wallum.";
+            form.reset();
+          })
+          .catch(function () { msg.textContent = "That did not send. Please try again in a moment."; });
+      });
     });
   })();
 </script>

@@ -78,6 +78,34 @@ page = f"""<meta charset="utf-8">
 
 <script>
   (function () {{
+    // Fit "The last one per cent" to the exact width of WALLUM above it.
+    // Letter-spacing is the only lever that does not alter cap height, so the
+    // two lines stay locked to the same left and right edges. Trailing spacing
+    // is compensated with a matching text-indent, and the result is measured
+    // and corrected rather than trusted — rounding leaves a few pixels.
+    function fitLockup() {{
+      document.querySelectorAll(".hero .wordmark").forEach(function (mark) {{
+        var sub = mark.parentNode.querySelector(".hero-onepc");
+        if (!sub) return;
+        var target = mark.getBoundingClientRect().width;
+        var n = (sub.textContent || "").trim().length;
+        if (!target || n < 2) return;
+        sub.style.letterSpacing = "0px";
+        sub.style.textIndent = "0px";
+        var ls = (target - sub.getBoundingClientRect().width) / n;
+        for (var pass = 0; pass < 4; pass++) {{
+          sub.style.letterSpacing = ls + "px";
+          sub.style.textIndent = ls + "px";
+          var diff = target - sub.getBoundingClientRect().width;
+          if (Math.abs(diff) < 0.4) break;
+          ls += diff / n;
+        }}
+      }});
+    }}
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitLockup);
+    window.addEventListener("resize", fitLockup);
+    setTimeout(fitLockup, 0); setTimeout(fitLockup, 400);
+
     var views = {{ b: document.getElementById("ver-b"),
                    a: document.getElementById("ver-a"),
                    s: document.getElementById("ver-s") }};
@@ -91,6 +119,7 @@ page = f"""<meta charset="utf-8">
         else tabs[k].removeAttribute("aria-current");
       }});
       window.scrollTo(0, 0);
+      fitLockup();   // a hidden view measures zero, so fit it once it is shown
     }}
     tabs.b.addEventListener("click", function () {{ show("b"); }});
     tabs.a.addEventListener("click", function () {{ show("a"); }});
