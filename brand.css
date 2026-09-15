@@ -1530,3 +1530,10 @@
     .creed{ font-size:1rem; letter-spacing:.1em; text-indent:.1em; }
   }
   @media(max-width:380px){ .creed{ font-size:.92rem; } }
+
+  /* ===== The stake, said first =====
+     The lede opens on the number and the bold carries it; the dark band sets
+     body copy at 76% white, so the bold has to go to full strength or it
+     reads as the same weight in a different colour. */
+  .living-lede strong{ font-weight:700; color:#F6F2E7; }
+  .ground-sub strong{ font-weight:700; color:#F6F2E7; }
