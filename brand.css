@@ -1387,3 +1387,17 @@
     .join input{ font-size:.75rem; padding:.7em .85em; }
     .join .btn{ font-size:.6rem; padding:.72em 1.15em; }
   }
+
+  /* the line that finishes the lockup's sentence */
+  .hero-onepc-sub{
+    margin-top:clamp(7px,1vw,11px);
+    font-family:var(--body); font-weight:500;
+    font-size:clamp(.74rem,1.15vw,.9rem); letter-spacing:.02em;
+    color:#24301D;
+    text-shadow:0 1px 3px rgba(249,245,233,1), 0 0 14px rgba(249,245,233,1);
+  }
+  .hero--frog .hero-onepc-sub{
+    color:rgba(239,234,220,.9);
+    text-shadow:0 1px 3px rgba(0,0,0,.85), 0 0 18px rgba(0,0,0,.7);
+  }
+  @media(max-width:700px){ .hero-onepc-sub{ font-size:.6rem; } }
