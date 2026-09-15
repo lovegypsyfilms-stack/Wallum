@@ -56,6 +56,8 @@
     --photo-canopy:    url("photos/canopy.jpg");
     --photo-closing:   url("photos/heath-dusk.jpg");
     --photo-girl:      url("photos/girl.jpg");
+    --photo-hero-dawn: url("photos/hero-girl-dawn.jpg");
+    --photo-hero-frog: url("photos/hero-girl-frog.jpg");
     --photo-trees:     url("photos/trees.jpg");
     --photo-face-1:    url("photos/face-1.jpg");
     --photo-face-2:    url("photos/face-2.jpg");
@@ -943,3 +945,39 @@
     color:#8A6C2E !important;
     filter:drop-shadow(0 1px 3px rgba(255,252,242,.95)) drop-shadow(0 0 14px rgba(255,252,242,.9));
   }
+
+  /* ================= HERO VARIANTS (pitch only) ================= */
+  /* Three first frames to choose between. The third inverts the treatment:
+     her face fills the centre, so the type goes light over a darkened image
+     rather than dark over a lightened one. */
+  .hero--dawn .hero-sky{
+    background-image:var(--photo-hero-dawn);
+    background-position:38% 32%; background-size:cover;
+  }
+  .hero--frog .hero-sky{
+    background-image:var(--photo-hero-frog);
+    background-position:44% 34%; background-size:cover;
+  }
+  .hero--frog .hero-mist{
+    background:
+      radial-gradient(60% 54% at 50% 50%, rgba(10,16,10,.7) 0%, rgba(10,16,10,.56) 46%, rgba(10,16,10,.3) 78%, rgba(10,16,10,.22) 100%),
+      linear-gradient(180deg, rgba(10,16,10,.72) 0%, rgba(10,16,10,.2) 26%, rgba(10,16,10,.3) 70%, rgba(8,13,8,.8) 100%);
+  }
+  .hero--frog .wordmark,
+  .hero--frog .creed,
+  .hero--frog .behere{ color:#F6F2E7; text-shadow:0 2px 20px rgba(0,0,0,.72), 0 1px 3px rgba(0,0,0,.6); }
+  .hero--frog .hero-what,
+  .hero--frog .onepc-sub,
+  .hero--frog .join-alt,
+  .hero--frog .cta-note{ color:#EFEADC; text-shadow:0 1px 3px rgba(0,0,0,.8), 0 0 16px rgba(0,0,0,.7); }
+  .hero--frog .onepc-head{ color:var(--brass-lt); text-shadow:0 1px 3px rgba(0,0,0,.8); }
+  .hero--frog .join-alt a{ color:var(--brass-lt); }
+  .hero--frog .join-msg{ color:var(--brass-lt); text-shadow:0 1px 3px rgba(0,0,0,.8); }
+  .hero--frog .emblem{ color:var(--brass-lt) !important; filter:drop-shadow(0 1px 10px rgba(0,0,0,.7)); }
+  .hero--frog .hero-rule i{ background:linear-gradient(90deg,rgba(217,188,130,0),var(--brass-lt),rgba(217,188,130,0)); }
+  .hero--frog .hero-rule b{ background:var(--brass-lt); }
+  .hero--frog .join input{ background:rgba(255,253,246,.96); }
+
+  /* the hero picker sits with the version switcher */
+  .vswitch .sep{ width:1px; align-self:stretch; background:rgba(214,190,130,.3); margin-inline:6px; }
+  .vswitch .hero-pick{ padding-inline:.85em; }

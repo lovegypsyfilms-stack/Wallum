@@ -69,6 +69,11 @@ page = f"""<meta charset="utf-8">
   <b>Version</b>
   <button type="button" id="to-b" aria-current="page">B &middot; Reduced</button>
   <button type="button" id="to-a">A &middot; Full CLAI copy</button>
+  <span class="sep" aria-hidden="true"></span>
+  <b>Hero</b>
+  <button type="button" class="hero-pick" data-hero="">1</button>
+  <button type="button" class="hero-pick" data-hero="hero--dawn">2</button>
+  <button type="button" class="hero-pick" data-hero="hero--frog" aria-current="page">3</button>
 </nav>
 
 <script>
@@ -95,6 +100,22 @@ page = f"""<meta charset="utf-8">
       if (!el) return;
       e.preventDefault();
       show(el.getAttribute("data-view"));
+    }});
+    // hero picker — swaps the first frame in place
+    var picks = document.querySelectorAll(".hero-pick");
+    picks.forEach(function (btn) {{
+      btn.addEventListener("click", function () {{
+        var hero = document.querySelector("#ver-b .hero");
+        if (!hero) return;
+        hero.classList.remove("hero--dawn", "hero--frog");
+        var v = btn.getAttribute("data-hero");
+        if (v) hero.classList.add(v);
+        picks.forEach(function (o) {{
+          if (o === btn) o.setAttribute("aria-current", "page");
+          else o.removeAttribute("aria-current");
+        }});
+        show("b");
+      }});
     }});
   }})();
 </script>
