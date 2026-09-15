@@ -57,6 +57,7 @@
     --photo-closing:   url("photos/heath-dusk.jpg");
     --photo-girl:      url("photos/girl.jpg");
     --photo-hero-frog: url("photos/hero-girl-frog.jpg");
+    --photo-hero-mob:  url("photos/hero-mobile.jpg");
     --photo-bobbrown:  url("photos/bob-brown.jpg");
     --photo-hands:     url("photos/hands.jpg");
     --w-tessa: url("photos/wall/tessa.jpg");
@@ -1387,3 +1388,145 @@
     .join input{ font-size:.75rem; padding:.7em .85em; }
     .join .btn{ font-size:.6rem; padding:.72em 1.15em; }
   }
+
+  /* the line that finishes the lockup's sentence */
+  .hero-onepc-sub{
+    margin-top:clamp(7px,1vw,11px);
+    font-family:var(--body); font-weight:500;
+    font-size:clamp(.74rem,1.15vw,.9rem); letter-spacing:.02em;
+    color:#24301D;
+    text-shadow:0 1px 3px rgba(249,245,233,1), 0 0 14px rgba(249,245,233,1);
+  }
+  .hero--frog .hero-onepc-sub{
+    color:rgba(239,234,220,.9);
+    text-shadow:0 1px 3px rgba(0,0,0,.85), 0 0 18px rgba(0,0,0,.7);
+  }
+  @media(max-width:700px){ .hero-onepc-sub{ font-size:.6rem; } }
+
+  /* Bring her face further left, clear of the wordmark, so her eyes read.
+     A higher X pans the window right across the frame, which moves the
+     subject left on screen. On a phone there is far more overflow, so the
+     same intent needs a much lower number — and the frog goes off the right
+     edge, which is the trade for seeing her. */
+  .hero--frog .hero-sky{ background-position:85% 44%; }
+  @media(max-width:700px){ .hero--frog .hero-sky{ background-position:32% 36%; } }
+
+  /* A 16:9 frame forced into a portrait viewport magnifies whatever it keeps,
+     which turned her into a wall of face. The phone gets its own narrower crop
+     holding both her and the frog, so it barely has to zoom at all. */
+  @media(max-width:700px){
+    .hero--frog .hero-sky{
+      background-image:var(--photo-hero-mob);
+      background-position:center 36%;
+    }
+  }
+
+  /* ===== BE HERE: tracking was doing too much work ===== */
+  .behere{ letter-spacing:.2em; text-indent:.2em; }
+  @media(max-width:700px){ .behere{ letter-spacing:.16em; text-indent:.16em; } }
+
+  /* ===== Come together now follows the dark hero, so it takes the light,
+           and the species section takes the dark it gives up ===== */
+  .gather{ background:var(--paper); color:var(--ink); }
+  .gather-globe{ background:var(--paper); background-image:none; }
+  .gather h2{ color:var(--forest); }
+  .gather .big-idea{ color:var(--moss); }
+  .wall-note{ color:var(--sage-dim); }
+
+  .living{ background:var(--ink); color:#EFEADC; }
+  .living .section-title{ color:#F6F2E7; }
+  .living-lede{ color:rgba(239,234,220,.76); }
+
+  /* the named thing carries the weight in the lockup's sub-line */
+  .hero-onepc-sub strong{ font-weight:700; color:var(--moss); }
+  .hero--frog .hero-onepc-sub strong{ color:#F6F2E7; }
+
+  /* ===== New hero frame: she is composed to the left in the plate itself =====
+     The old plate had her near centre, so the window had to be panned hard
+     right (85%) to push her left on screen. This one arrives already placed —
+     panning it now would shove her off the edge — so the window sits close to
+     centre and the frog stays in frame on the right. */
+  .hero--frog .hero-sky{ background-position:45% 44%; }
+
+  /* ===== The last word was pinned to the left edge =====
+     .band > .inner is a direct-child rule, and this .inner is a grandchild
+     (it sits inside .steward-hands), so it never picked up the page measure.
+     As a bare flex child it shrank to its own text and parked at left:0 —
+     justify-content had no spare width to work with. */
+  .steward-hands .inner{
+    width:100%; max-width:1180px;
+    margin-inline:auto; padding-inline:var(--gutter);
+  }
+
+  /* ===== Hero stack: two measures, not seven =====
+     Everything structural locks to the width of WALLUM itself (published as
+     --lockup-w by fitLockup, which already measures it for the sub-line), and
+     the creed steps clearly outside that column. It was 598px against the
+     lockup's 484 — close enough to read as a mistake rather than a decision.
+     The creed is the sentence the whole site turns on, so it goes wider and
+     louder instead of being trimmed back to match. */
+  .hero-rule{ width:min(100%, var(--lockup-w, 340px)); }
+  .join{ width:min(100%, var(--lockup-w, 440px)); }
+  .creed{ font-size:clamp(1.42rem,3.7vw,2.62rem); }
+
+  @media(max-width:700px){
+    /* the phone sets the creed in absolute rem against a 150% root, and the
+       stack is narrow enough there that one measure is the only measure */
+    .creed{ font-size:1.12rem; }
+    .hero-rule, .join{ width:min(100%, var(--lockup-w, 340px)); }
+  }
+  @media(max-width:380px){ .creed{ font-size:1rem; } }
+
+  /* the explainer may sit inside the lockup column but never overhang it —
+     on a phone its natural single line ran wider than WALLUM above it */
+  .hero-onepc-sub{ max-width:min(100%, var(--lockup-w, 480px)); margin-inline:auto; }
+
+  /* ===== The hero was dark twice over =====
+     The plate itself is backlit and sat low — that is lifted in the file — and
+     a heavy scrim was laid over it so light type would hold. With a brighter
+     plate underneath the scrim can come right back; the type keeps its footing
+     on its own text-shadows rather than on a curtain over the photograph. */
+  .hero--frog .hero-mist{
+    background:
+      radial-gradient(64% 58% at 50% 52%, rgba(10,16,10,.34) 0%, rgba(10,16,10,.24) 48%, rgba(10,16,10,.1) 80%, rgba(10,16,10,.04) 100%),
+      linear-gradient(180deg, rgba(10,16,10,.5) 0%, rgba(10,16,10,.06) 26%, rgba(10,16,10,.12) 68%, rgba(8,13,8,.6) 100%);
+  }
+  /* the type carries a little more of its own contrast now that the scrim is thin */
+  .hero--frog .wordmark,
+  .hero--frog .creed,
+  .hero--frog .behere{ text-shadow:0 2px 24px rgba(0,0,0,.82), 0 1px 5px rgba(0,0,0,.72); }
+
+  /* ===== The creed, tracked open =====
+     It is the one line the site turns on, so it gets set like a statement
+     rather than a sentence — the letters carry space between them and the
+     measure widens with them. */
+  .creed{ letter-spacing:.1em; text-indent:.1em; }
+  @media(max-width:700px){ .creed{ letter-spacing:.07em; text-indent:.07em; } }
+
+  /* The phone runs a different plate — a bright, high-key close-up — and the
+     type sits straight over her face rather than over open ground, so it keeps
+     more of the scrim than the desktop frame needs. */
+  @media(max-width:700px){
+    .hero--frog .hero-mist{
+      background:
+        radial-gradient(70% 58% at 50% 46%, rgba(10,16,10,.52) 0%, rgba(10,16,10,.4) 50%, rgba(10,16,10,.2) 82%, rgba(10,16,10,.1) 100%),
+        linear-gradient(180deg, rgba(10,16,10,.62) 0%, rgba(10,16,10,.14) 24%, rgba(10,16,10,.2) 66%, rgba(8,13,8,.72) 100%);
+    }
+  }
+
+  /* ===== The creed, lighter =====
+     Tracked open at display weight and display size it stopped reading as a
+     line and started reading as a wall — wide, but imposing with it. The
+     width is the point, so the width stays: the size comes down, the weight
+     comes off, and the tracking opens further to hold the measure. It should
+     sound like someone saying it, not like signage. */
+  .creed{
+    font-weight:500;
+    font-size:clamp(1.12rem,2.5vw,1.78rem);
+    letter-spacing:.16em; text-indent:.16em;
+    line-height:1.5;
+  }
+  @media(max-width:700px){
+    .creed{ font-size:1rem; letter-spacing:.1em; text-indent:.1em; }
+  }
+  @media(max-width:380px){ .creed{ font-size:.92rem; } }
