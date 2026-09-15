@@ -56,7 +56,6 @@
     --photo-canopy:    url("photos/canopy.jpg");
     --photo-closing:   url("photos/heath-dusk.jpg");
     --photo-girl:      url("photos/girl.jpg");
-    --photo-hero-dawn: url("photos/hero-girl-dawn.jpg");
     --photo-hero-frog: url("photos/hero-girl-frog.jpg");
     --photo-bobbrown:  url("photos/bob-brown.jpg");
     --photo-hands:     url("photos/hands.jpg");
@@ -114,7 +113,7 @@
     background:var(--cream);
     color:var(--ink);
     font-family:var(--body);
-    font-size:clamp(15.5px,.7vw + 13px,17px);
+    font-size:clamp(0.97rem,.7vw + 0.8rem,1.06rem);
     line-height:1.62;
     font-optical-sizing:auto;
     -webkit-font-smoothing:antialiased;
@@ -967,10 +966,6 @@
   /* Three first frames to choose between. The third inverts the treatment:
      her face fills the centre, so the type goes light over a darkened image
      rather than dark over a lightened one. */
-  .hero--dawn .hero-sky{
-    background-image:var(--photo-hero-dawn);
-    background-position:38% 32%; background-size:cover;
-  }
   .hero--frog .hero-sky{
     background-image:var(--photo-hero-frog);
     background-position:44% 34%; background-size:cover;
@@ -1301,3 +1296,94 @@
   .w-nia{ background-image:var(--w-nia); }
   .w-mei{ background-image:var(--w-mei); }
   .w-sophie{ background-image:var(--w-sophie); }
+
+  /* ================= SWITCHER ================= */
+  .vswitch{ padding:6px 6px; gap:4px; }
+  .vswitch button{
+    font-size:.72rem; letter-spacing:.08em; padding:.72em 1.25em;
+    text-transform:none;
+  }
+
+  /* ================= STEWARDSHIP ================= */
+  .ground-sub{ font-size:clamp(1.02rem,1.6vw,1.22rem); line-height:1.45; }
+  .ground-sub span{ color:rgba(239,234,220,.62); }
+
+  /* the last word sits on the hands rather than in a band of its own */
+  .steward-hands{
+    min-height:clamp(300px,34vw,440px);
+    display:flex; align-items:center;
+  }
+  .steward-hands::before{
+    content:""; position:absolute; inset:0; z-index:1;
+    background:linear-gradient(180deg, rgba(8,13,9,.34) 0%, rgba(8,13,9,.52) 50%, rgba(8,13,9,.72) 100%);
+  }
+  .steward-hands{ position:relative; }
+  .steward-hands .inner{ position:relative; z-index:2; display:flex; justify-content:center; }
+  .steward-hands .last-word{ max-width:24ch; text-align:center; }
+  .steward-hands .last-word p{
+    font-size:clamp(1.5rem,3.6vw,2.4rem); line-height:1.3;
+    text-shadow:0 2px 26px rgba(0,0,0,.85), 0 1px 4px rgba(0,0,0,.8);
+  }
+
+  /* ================= PHONE: EVERYTHING BIGGER ================= */
+  /* Half again on every letter and number. Most type is clamp()ed with a rem
+     minimum that wins at this width, so lifting the root lifts nearly all of
+     it at once; the handful set in px are raised individually below. */
+  @media(max-width:700px){
+    :root{ font-size:150%; }
+
+    /* the hero must own the first screen — nothing below it should peek in.
+       It is pulled up under the sticky nav by a negative margin, so the fill
+       height has to add that back. */
+    .hero{ min-height:calc(100svh + 72px); }
+    .hero .inner{ padding-block:clamp(70px,16vw,110px) clamp(40px,10vw,70px); }
+
+    .nav-links a{ font-size:.66rem; }
+    .mark-name{ font-size:1rem; }
+    .mark-sub{ font-size:.46rem; }
+    .vswitch button{ font-size:.62rem; padding:.7em 1em; }
+    .wname{ font-size:.62rem; }
+    .wplace{ font-size:.54rem; }
+    .wchip{ font-size:.44rem; }
+    .endorsers li{ font-size:.5rem; }
+    .foot-tag{ font-size:.5rem; }
+    .foot-ack{ font-size:.66rem; }
+    .wall-note{ font-size:.62rem; }
+    .credit{ font-size:.5rem; }
+    .wordcount{ font-size:.5rem; }
+  }
+
+  /* The 150% lift is for content. Chrome — nav, switcher — must not take it,
+     or it eats a third of the screen and pushes the ask below the fold. */
+  @media(max-width:700px){
+    .nav-in{ padding-block:8px; row-gap:6px; column-gap:10px; }
+    .mark svg{ width:26px; height:26px; }
+    .mark-name{ font-size:.72rem; letter-spacing:.02em; }
+    .mark-sub{ font-size:.34rem; margin-top:3px; }
+    .nav-links a{ font-size:.42rem; letter-spacing:.09em; }
+    .nav .btn{ font-size:.44rem; padding:.62em 1.1em; }
+    .vswitch{ padding:4px; }
+    .vswitch button{ font-size:.5rem; padding:.62em .9em; }
+
+    /* and the hero itself has to hold the whole ask above the fold */
+    .hero .inner{ padding-block:clamp(52px,12vw,76px) clamp(54px,13vw,80px); }
+    .emblem{ width:clamp(46px,11vw,62px); }
+    .wordmark{ margin-top:clamp(10px,2vw,16px); }
+    .creed{ font-size:1.12rem; line-height:1.22; margin-top:clamp(14px,3vw,20px); }
+    .behere{ font-size:1.18rem; margin-top:clamp(14px,3vw,20px); }
+    .hero-rule{ margin-top:clamp(10px,2.4vw,16px); }
+    .join{ margin-top:clamp(12px,3vw,18px); }
+    .join input{ font-size:.8rem; padding:.78em .9em; }
+    .join .btn{ font-size:.66rem; padding:.78em 1.3em; }
+    .join-alt{ font-size:.62rem; margin-top:8px; }
+  }
+
+  /* the smallest phones lose the ask by a hair — buy the room back */
+  @media(max-width:380px){
+    .hero .inner{ padding-block:44px 46px; }
+    .creed{ font-size:1rem; }
+    .behere{ font-size:1.05rem; }
+    .emblem{ width:42px; }
+    .join input{ font-size:.75rem; padding:.7em .85em; }
+    .join .btn{ font-size:.6rem; padding:.72em 1.15em; }
+  }
