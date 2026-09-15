@@ -57,6 +57,7 @@
     --photo-closing:   url("photos/heath-dusk.jpg");
     --photo-girl:      url("photos/girl.jpg");
     --photo-hero-frog: url("photos/hero-girl-frog.jpg");
+    --photo-hero-mob:  url("photos/hero-mobile.jpg");
     --photo-bobbrown:  url("photos/bob-brown.jpg");
     --photo-hands:     url("photos/hands.jpg");
     --w-tessa: url("photos/wall/tessa.jpg");
@@ -1401,3 +1402,37 @@
     text-shadow:0 1px 3px rgba(0,0,0,.85), 0 0 18px rgba(0,0,0,.7);
   }
   @media(max-width:700px){ .hero-onepc-sub{ font-size:.6rem; } }
+
+  /* Bring her face further left, clear of the wordmark, so her eyes read.
+     A higher X pans the window right across the frame, which moves the
+     subject left on screen. On a phone there is far more overflow, so the
+     same intent needs a much lower number — and the frog goes off the right
+     edge, which is the trade for seeing her. */
+  .hero--frog .hero-sky{ background-position:85% 44%; }
+  @media(max-width:700px){ .hero--frog .hero-sky{ background-position:32% 36%; } }
+
+  /* A 16:9 frame forced into a portrait viewport magnifies whatever it keeps,
+     which turned her into a wall of face. The phone gets its own narrower crop
+     holding both her and the frog, so it barely has to zoom at all. */
+  @media(max-width:700px){
+    .hero--frog .hero-sky{
+      background-image:var(--photo-hero-mob);
+      background-position:center 36%;
+    }
+  }
+
+  /* ===== BE HERE: tracking was doing too much work ===== */
+  .behere{ letter-spacing:.2em; text-indent:.2em; }
+  @media(max-width:700px){ .behere{ letter-spacing:.16em; text-indent:.16em; } }
+
+  /* ===== Come together now follows the dark hero, so it takes the light,
+           and the species section takes the dark it gives up ===== */
+  .gather{ background:var(--paper); color:var(--ink); }
+  .gather-globe{ background:var(--paper); background-image:none; }
+  .gather h2{ color:var(--forest); }
+  .gather .big-idea{ color:var(--moss); }
+  .wall-note{ color:var(--sage-dim); }
+
+  .living{ background:var(--ink); color:#EFEADC; }
+  .living .section-title{ color:#F6F2E7; }
+  .living-lede{ color:rgba(239,234,220,.76); }
