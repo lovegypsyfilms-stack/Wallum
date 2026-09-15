@@ -59,21 +59,21 @@
     --photo-hero-dawn: url("photos/hero-girl-dawn.jpg");
     --photo-hero-frog: url("photos/hero-girl-frog.jpg");
     --photo-bobbrown:  url("photos/bob-brown.jpg");
-    --w-asha: url("photos/wall/asha.jpg");
-    --w-tom: url("photos/wall/tom.jpg");
-    --w-moana: url("photos/wall/moana.jpg");
-    --w-daniel: url("photos/wall/daniel.jpg");
-    --w-marlya: url("photos/wall/marlya.jpg");
-    --w-riverlands: url("photos/wall/riverlands.jpg");
-    --w-sophie: url("photos/wall/sophie.jpg");
-    --w-jude: url("photos/wall/jude.jpg");
+    --w-tessa: url("photos/wall/tessa.jpg");
+    --w-mara: url("photos/wall/mara.jpg");
+    --w-kai: url("photos/wall/kai.jpg");
+    --w-amara: url("photos/wall/amara.jpg");
+    --w-lachlan: url("photos/wall/lachlan.jpg");
+    --w-ravi: url("photos/wall/ravi.jpg");
+    --w-lily: url("photos/wall/lily.jpg");
+    --w-hugh: url("photos/wall/hugh.jpg");
+    --w-noah: url("photos/wall/noah.jpg");
+    --w-leilani: url("photos/wall/leilani.jpg");
+    --w-orion: url("photos/wall/orion.jpg");
     --w-mei: url("photos/wall/mei.jpg");
-    --w-commonground: url("photos/wall/commonground.jpg");
-    --w-rae: url("photos/wall/rae.jpg");
-    --w-habitat: url("photos/wall/habitat.jpg");
-    --w-carlos: url("photos/wall/carlos.jpg");
-    --w-coastalkin: url("photos/wall/coastalkin.jpg");
-    --w-nextchapter: url("photos/wall/nextchapter.jpg");
+    --w-zac: url("photos/wall/zac.jpg");
+    --w-nia: url("photos/wall/nia.jpg");
+    --w-sophie: url("photos/wall/sophie.jpg");
     --photo-trees:     url("photos/trees.jpg");
     --photo-face-1:    url("photos/face-1.jpg");
     --photo-face-2:    url("photos/face-2.jpg");
@@ -1240,21 +1240,6 @@
     margin-top:16px; font-size:.78rem; font-style:italic;
     color:rgba(239,234,220,.55); text-align:center; width:100%;
   }
-  .w-asha{ background-image:var(--w-asha); }
-  .w-tom{ background-image:var(--w-tom); }
-  .w-moana{ background-image:var(--w-moana); }
-  .w-daniel{ background-image:var(--w-daniel); }
-  .w-marlya{ background-image:var(--w-marlya); }
-  .w-riverlands{ background-image:var(--w-riverlands); }
-  .w-sophie{ background-image:var(--w-sophie); }
-  .w-jude{ background-image:var(--w-jude); }
-  .w-mei{ background-image:var(--w-mei); }
-  .w-commonground{ background-image:var(--w-commonground); }
-  .w-rae{ background-image:var(--w-rae); }
-  .w-habitat{ background-image:var(--w-habitat); }
-  .w-carlos{ background-image:var(--w-carlos); }
-  .w-coastalkin{ background-image:var(--w-coastalkin); }
-  .w-nextchapter{ background-image:var(--w-nextchapter); }
 
   /* the gathering band is now hands over the heath, not the globe */
   .gather-globe{ background-position:center 42%; }
@@ -1276,3 +1261,19 @@
     background-size:cover, cover;
     background-position:center, center 40%;
   }
+
+  .w-tessa{ background-image:var(--w-tessa); }
+  .w-mara{ background-image:var(--w-mara); }
+  .w-kai{ background-image:var(--w-kai); }
+  .w-amara{ background-image:var(--w-amara); }
+  .w-lachlan{ background-image:var(--w-lachlan); }
+  .w-ravi{ background-image:var(--w-ravi); }
+  .w-lily{ background-image:var(--w-lily); }
+  .w-hugh{ background-image:var(--w-hugh); }
+  .w-noah{ background-image:var(--w-noah); }
+  .w-leilani{ background-image:var(--w-leilani); }
+  .w-orion{ background-image:var(--w-orion); }
+  .w-mei{ background-image:var(--w-mei); }
+  .w-zac{ background-image:var(--w-zac); }
+  .w-nia{ background-image:var(--w-nia); }
+  .w-sophie{ background-image:var(--w-sophie); }
