@@ -59,6 +59,21 @@
     --photo-hero-dawn: url("photos/hero-girl-dawn.jpg");
     --photo-hero-frog: url("photos/hero-girl-frog.jpg");
     --photo-bobbrown:  url("photos/bob-brown.jpg");
+    --w-asha: url("photos/wall/asha.jpg");
+    --w-tom: url("photos/wall/tom.jpg");
+    --w-moana: url("photos/wall/moana.jpg");
+    --w-daniel: url("photos/wall/daniel.jpg");
+    --w-marlya: url("photos/wall/marlya.jpg");
+    --w-riverlands: url("photos/wall/riverlands.jpg");
+    --w-sophie: url("photos/wall/sophie.jpg");
+    --w-jude: url("photos/wall/jude.jpg");
+    --w-mei: url("photos/wall/mei.jpg");
+    --w-commonground: url("photos/wall/commonground.jpg");
+    --w-rae: url("photos/wall/rae.jpg");
+    --w-habitat: url("photos/wall/habitat.jpg");
+    --w-carlos: url("photos/wall/carlos.jpg");
+    --w-coastalkin: url("photos/wall/coastalkin.jpg");
+    --w-nextchapter: url("photos/wall/nextchapter.jpg");
     --photo-trees:     url("photos/trees.jpg");
     --photo-face-1:    url("photos/face-1.jpg");
     --photo-face-2:    url("photos/face-2.jpg");
@@ -1184,3 +1199,80 @@
   }
   .act .inner.act-simple .amounts{ max-width:520px; }
   .act .inner.act-simple .act-actions{ max-width:520px; }
+
+  /* ================= THE WALL, REBUILT ================= */
+  /* Identical vertical rectangles, edge to edge, no borders and no gaps. In the
+     live version each cell is whatever photograph or avatar a person supplies
+     when they join, so the cell has to be a fixed frame the image fills. */
+  .wall{
+    list-style:none; margin:0; padding:0; width:100%;
+    display:grid; gap:0;
+    grid-template-columns:repeat(3,1fr);
+  }
+  @media(min-width:620px){ .wall{ grid-template-columns:repeat(5,1fr); } }
+  .wtile{
+    position:relative; overflow:hidden;
+    aspect-ratio:3/4; min-height:0; padding:0; border:0; background:#101810;
+    background-size:cover; background-position:center 22%;
+    display:flex; flex-direction:column; justify-content:flex-end;
+  }
+  .wtile::after{
+    content:""; position:absolute; inset:0; z-index:1;
+    background:linear-gradient(180deg, rgba(8,13,8,0) 42%, rgba(8,13,8,.62) 74%, rgba(6,10,6,.92) 100%);
+  }
+  .wtile > span{ position:relative; z-index:2; padding-inline:clamp(8px,.8vw,12px); }
+  .wname{
+    font-family:var(--body); font-weight:700;
+    font-size:clamp(.66rem,.85vw,.78rem); line-height:1.2; color:#F4EFE2;
+  }
+  .wplace{
+    font-family:var(--body); font-weight:500;
+    font-size:clamp(.56rem,.7vw,.66rem); line-height:1.25;
+    color:rgba(239,234,220,.68); padding-bottom:clamp(9px,.9vw,13px);
+  }
+  .wchip{
+    position:absolute; top:9px; left:clamp(8px,.8vw,12px); z-index:2; padding:0;
+    font-family:var(--body); font-weight:700; font-size:.48rem; letter-spacing:.14em;
+    text-transform:uppercase; color:var(--brass-lt);
+    text-shadow:0 1px 4px rgba(0,0,0,.8);
+  }
+  .wall-note{
+    margin-top:16px; font-size:.78rem; font-style:italic;
+    color:rgba(239,234,220,.55); text-align:center; width:100%;
+  }
+  .w-asha{ background-image:var(--w-asha); }
+  .w-tom{ background-image:var(--w-tom); }
+  .w-moana{ background-image:var(--w-moana); }
+  .w-daniel{ background-image:var(--w-daniel); }
+  .w-marlya{ background-image:var(--w-marlya); }
+  .w-riverlands{ background-image:var(--w-riverlands); }
+  .w-sophie{ background-image:var(--w-sophie); }
+  .w-jude{ background-image:var(--w-jude); }
+  .w-mei{ background-image:var(--w-mei); }
+  .w-commonground{ background-image:var(--w-commonground); }
+  .w-rae{ background-image:var(--w-rae); }
+  .w-habitat{ background-image:var(--w-habitat); }
+  .w-carlos{ background-image:var(--w-carlos); }
+  .w-coastalkin{ background-image:var(--w-coastalkin); }
+  .w-nextchapter{ background-image:var(--w-nextchapter); }
+
+  /* the gathering band is now hands over the heath, not the globe */
+  .gather-globe{ background-position:center 42%; }
+  .gather .inner{ padding-block:clamp(44px,5.6vw,76px); }
+
+  /* supplied portrait of Bob Brown, cropped close */
+  .endorse-in .portrait{ background-position:center 30%; }
+
+  /* .wtile > span outranked .wchip and pinned the chip back into flow */
+  .wtile > .wchip{
+    position:absolute; top:9px; left:clamp(8px,.8vw,12px);
+    padding:0; z-index:3;
+  }
+  /* the hands photograph is doing too much behind a wall of faces */
+  .gather-globe{
+    background-image:
+      linear-gradient(180deg, rgba(8,13,9,.9) 0%, rgba(8,13,9,.82) 45%, rgba(8,13,9,.9) 100%),
+      var(--photo-gather);
+    background-size:cover, cover;
+    background-position:center, center 40%;
+  }
