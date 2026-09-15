@@ -1440,3 +1440,43 @@
   /* the named thing carries the weight in the lockup's sub-line */
   .hero-onepc-sub strong{ font-weight:700; color:var(--moss); }
   .hero--frog .hero-onepc-sub strong{ color:#F6F2E7; }
+
+  /* ===== New hero frame: she is composed to the left in the plate itself =====
+     The old plate had her near centre, so the window had to be panned hard
+     right (85%) to push her left on screen. This one arrives already placed —
+     panning it now would shove her off the edge — so the window sits close to
+     centre and the frog stays in frame on the right. */
+  .hero--frog .hero-sky{ background-position:45% 44%; }
+
+  /* ===== The last word was pinned to the left edge =====
+     .band > .inner is a direct-child rule, and this .inner is a grandchild
+     (it sits inside .steward-hands), so it never picked up the page measure.
+     As a bare flex child it shrank to its own text and parked at left:0 —
+     justify-content had no spare width to work with. */
+  .steward-hands .inner{
+    width:100%; max-width:1180px;
+    margin-inline:auto; padding-inline:var(--gutter);
+  }
+
+  /* ===== Hero stack: two measures, not seven =====
+     Everything structural locks to the width of WALLUM itself (published as
+     --lockup-w by fitLockup, which already measures it for the sub-line), and
+     the creed steps clearly outside that column. It was 598px against the
+     lockup's 484 — close enough to read as a mistake rather than a decision.
+     The creed is the sentence the whole site turns on, so it goes wider and
+     louder instead of being trimmed back to match. */
+  .hero-rule{ width:min(100%, var(--lockup-w, 340px)); }
+  .join{ width:min(100%, var(--lockup-w, 440px)); }
+  .creed{ font-size:clamp(1.42rem,3.7vw,2.62rem); }
+
+  @media(max-width:700px){
+    /* the phone sets the creed in absolute rem against a 150% root, and the
+       stack is narrow enough there that one measure is the only measure */
+    .creed{ font-size:1.12rem; }
+    .hero-rule, .join{ width:min(100%, var(--lockup-w, 340px)); }
+  }
+  @media(max-width:380px){ .creed{ font-size:1rem; } }
+
+  /* the explainer may sit inside the lockup column but never overhang it —
+     on a phone its natural single line ran wider than WALLUM above it */
+  .hero-onepc-sub{ max-width:min(100%, var(--lockup-w, 480px)); margin-inline:auto; }

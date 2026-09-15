@@ -85,6 +85,9 @@ page = f"""<meta charset="utf-8">
         var sub = mark.parentNode.querySelector(".hero-onepc");
         if (!sub) return;
         var target = mark.getBoundingClientRect().width;
+        // the rule and the sign-up form lock to this same measure
+        var hero = mark.closest(".hero");
+        if (hero && target) hero.style.setProperty("--lockup-w", target + "px");
         var n = (sub.textContent || "").trim().length;
         if (!target || n < 2) return;
         sub.style.letterSpacing = "0px";
